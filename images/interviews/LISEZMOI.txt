@@ -1,0 +1,3 @@
+Déposez ici les photos des interviewés, nommées [slug].jpg (ex. antoine-vera.jpg).
+Format conseillé : carré ou portrait, 1200 px de large minimum, moins de 400 Ko.
+Puis renseignez  photo: "images/interviews/[slug].jpg"  dans data/interviews.js.

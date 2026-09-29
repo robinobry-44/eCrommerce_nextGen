@@ -118,8 +118,8 @@ window.INTERVIEWS = [
       { nom: "IBM Cognos", usage: "Analyses data business plus poussées" }
     ],
     mentors: [
-      { nom: "Sébastien Tortu", expertise: "CRO · Experimentation", organisation: "Boost Conversion", citation: "Une référence pour la méthodologie CRO et l'A/B testing en France, avec des contenus très orientés pratique et cas concrets." },
-      { nom: "Florent Kiecken", expertise: "E-commerce · Growth", organisation: "La Cargaison", citation: "Pour une vision plus large du e-commerce et de la croissance, complémentaire à l'approche pure CRO." }
+      { nom: "Sébastien Tortu", expertise: "CRO · Experimentation", organisation: "Boost Conversion", citation: "Une référence pour la méthodologie CRO et l'A/B testing en France, avec des contenus très orientés pratique et cas concrets.", lienLinkedin: "https://www.linkedin.com/in/sebastientortu/", photo: "images/inspirations/sebastien-tortu.jpg" },
+      { nom: "Florent Kiecken", expertise: "E-commerce · Growth", organisation: "La Cargaison", citation: "Pour une vision plus large du e-commerce et de la croissance, complémentaire à l'approche pure CRO.", lienLinkedin: "https://www.linkedin.com/in/florent-kiecken/", photo: "images/inspirations/florent-kiecken.jpg" }
     ],
     sujets: ["IA", "GEO"],
     aRetenir: {

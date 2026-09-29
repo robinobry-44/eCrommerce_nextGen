@@ -145,7 +145,7 @@ window.INTERVIEWS = [
     featured: true,
     photo: "images/interviews/caroline-hoang.jpg",
     photos: [],
-    lienLinkedin: "",
+    lienLinkedin: "https://www.linkedin.com/in/caroline-hoang7/",
     expertises: ["CRO", "Experimentation", "Data"],
     citation: "Le CRO, c'est l'art de transformer la curiosité en conviction.",
     accroche: "C'est l'intuition qui génère les meilleures hypothèses, la data te dit si tu avais raison.",
@@ -175,7 +175,7 @@ window.INTERVIEWS = [
       { nom: "Jira", usage: "Suivi des tests et des projets" }
     ],
     mentors: [
-      { nom: "Laurent Babicz de Salettes", relation: "mentor", expertise: "", organisation: "Showroomprivé", citation: "Mon tuteur en alternance chez Showroomprivé. C'est lui qui m'a introduit au monde du CRO et qui a cru en moi dès le départ !", lienLinkedin: "", photo: "images/inspirations/laurent-babicz-de-salettes.jpg" }
+      { nom: "Laurent Babicz de Salettes", relation: "mentor", expertise: "", organisation: "Showroomprivé", citation: "Mon tuteur en alternance chez Showroomprivé. C'est lui qui m'a introduit au monde du CRO et qui a cru en moi dès le départ !", lienLinkedin: "https://www.linkedin.com/in/laurentbabiczdesalettes/", photo: "images/inspirations/laurent-babicz-de-salettes.jpg" }
     ],
     sujets: ["Personnalisation", "Emotion AI"],
     aRetenir: {

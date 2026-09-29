@@ -96,6 +96,9 @@ window.SITE = {
     "GA4": "Google Analytics",
     "google analytics 4": "Google Analytics",
     "clarity": "Microsoft Clarity",
+    "showroomprive": "Showroomprivé",
+    "showroomprive.com": "Showroomprivé",
+    "showroomprivé.com": "Showroomprivé",
     "content square": "Contentsquare",
     "looker": "Looker Studio",
     "ecommerce": "E-commerce",
@@ -119,7 +122,9 @@ window.SITE = {
     "Figma": "Design",
     "Maze": "User Research",
     "Shopify": "Plateforme e-commerce",
-    "Welyft A/B Tests Identifier": "Veille A/B tests"
+    "Welyft A/B Tests Identifier": "Veille A/B tests",
+    "Confluence": "Documentation",
+    "Jira": "Gestion de projet"
   },
 
   // LOGOS : nom officiel (outil OU entreprise) → nom de domaine (logo récupéré automatiquement). Sinon : initiales.
@@ -138,6 +143,9 @@ window.SITE = {
     "Figma": "figma.com",
     "Maze": "maze.co",
     "Shopify": "shopify.com",
-    "Amplitude": "amplitude.com"
+    "Amplitude": "amplitude.com",
+    "Showroomprivé": "showroomprive.com",
+    "Confluence": "atlassian.com",
+    "Jira": "atlassian.com"
   }
 };

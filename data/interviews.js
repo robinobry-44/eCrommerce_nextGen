@@ -131,5 +131,61 @@ window.INTERVIEWS = [
       ]
     },
     motsCles: ["Data"]
+  },
+  {
+    slug: "caroline-hoang",
+    nom: "Caroline Hoang",
+    poste: "Chargée de CRO",
+    entreprise: "Showroomprivé",
+    typeProfil: "annonceur",
+    secteur: "E-commerce",
+    date: "2026-09-29",
+    promo: "2026",
+    numero: 2,
+    featured: true,
+    photo: "images/interviews/caroline-hoang.jpg",
+    photos: [],
+    lienLinkedin: "",
+    expertises: ["CRO", "Experimentation", "Data"],
+    citation: "Le CRO, c'est l'art de transformer la curiosité en conviction.",
+    accroche: "C'est l'intuition qui génère les meilleures hypothèses, la data te dit si tu avais raison.",
+    intro: "Caroline Hoang est chargée de CRO en alternance chez Showroomprivé. Son parcours s'est construit par étapes : le commerce d'abord avec un BTS Commerce International, puis le digital avec un Bachelor Design & Digital Marketing, et enfin la data avec un Master Digital Marketing & Data Analytics à l'EMLV. En deux ans, elle a touché à toutes les étapes du CRO, de l'idéation à l'analyse des résultats en passant par l'implémentation technique des tests A/B. Deux mois après son arrivée, un test de social proof sur l'univers Voyages a fait bondir les transactions par session sur web mobile. Dans cette interview, elle revient sur ce premier succès, sur l'équilibre entre intuition et data, sur la personnalisation émotionnelle et sur sa conviction : le CRO est un investissement stratégique, pas une collection de quick wins.",
+    careerPath: [
+      { etape: "BTS Commerce International", type: "formation" },
+      { etape: "Bachelor Design & Digital Marketing", type: "formation" },
+      { etape: "EMLV", type: "formation", detail: "Master Digital Marketing & Data Analytics" },
+      { etape: "Showroomprivé", type: "experience", detail: "Chargée de CRO en alternance" }
+    ],
+    reponses: [
+      { section: "parcours", question: "Formation", reponse: ["BTS Commerce International", "Bachelor Design & Digital Marketing", "Master Digital Marketing & Data Analytics · EMLV"] },
+      { section: "parcours", question: "Expérience", reponse: ["Chargée de CRO en alternance · Showroomprivé (2 ans)"] },
+      { section: "declic", titreSection: "Comment Caroline est arrivée dans le CRO", question: "Quel a été ton parcours ?", reponse: "Mon chemin est assez atypique : j'ai démarré avec un BTS Commerce International, puis j'ai enchaîné avec un Bachelor en Design & Digital Marketing avant d'intégrer l'EMLV pour un Master en Digital Marketing & Data Analytics. À chaque étape, j'ai cherché à aller un peu plus loin : d'abord comprendre le commerce, puis le digital, puis la data." },
+      { section: "Sa plus belle réussite", titreSection: "Le test de social proof qui a lancé Caroline", question: "Ta plus belle réussite ?", reponse: "Deux mois après mon arrivée chez Showroomprivé, j'ai travaillé sur un test de social proof sur l'univers Voyages. L'idée : afficher en temps réel le nombre de personnes consultant une offre, « X personnes consultent actuellement cette offre ». Une des variantes a généré une forte hausse des transactions par session sur web mobile. Ce que je retiens surtout, c'est que l'idée n'était pas révolutionnaire : c'est la rigueur de l'hypothèse, du ciblage et de l'analyse qui a tout fait." },
+      { section: "Sa plus grande découverte", titreSection: "Pourquoi Caroline mise sur l'intuition autant que sur la data", question: "Ta plus grande découverte ?", reponse: "Beaucoup pensent que le CRO, c'est juste faire parler les chiffres. En réalité, c'est l'intuition qui génère les meilleures hypothèses, et la data te dit si tu avais raison. Les deux sont donc indispensables !" },
+      { section: "Son plus gros challenge", titreSection: "Le défi des insights actionnables", question: "Le plus gros challenge du CRO ?", reponse: "Générer des insights vraiment actionnables. On a souvent beaucoup de données, mais passer de la donnée brute à une hypothèse pertinente demande du recul, de l'empathie et une vraie culture produit." },
+      { section: "La tendance qui l'enthousiasme", titreSection: "Pourquoi Caroline s'intéresse à la personnalisation émotionnelle", question: "La tendance qui t'enthousiasme le plus ?", reponse: "La personnalisation émotionnelle : l'idée d'adapter l'expérience selon le profil émotionnel de l'utilisateur. On y touche déjà chez Showroomprivé avec l'Emotion AI (EAI). C'est fascinant de voir que deux personnes sur la même page peuvent avoir des besoins psychologiques très différents." },
+      { section: "hottake", question: "Le CRO, c'est juste des tests A/B ?", ouiContexte: "sur la méthode", oui: "Le test A/B, c'est le moyen de transport.", nonContexte: "sur le fond", non: "Ce n'est pas la destination : derrière chaque test, il y a une vraie question sur le comportement humain." },
+      { section: "Ce qu'elle aimerait changer", titreSection: "Le CRO, un investissement stratégique", question: "Si tu pouvais changer une chose ?", reponse: "Que le CRO soit perçu comme un investissement stratégique et non comme un outil de « quick win ». Pour moi, les meilleurs programmes CRO sont ceux qui s'inscrivent dans la durée et dans une culture de l'apprentissage continu." },
+      { section: "Et demain ?", titreSection: "Où Caroline se voit dans 3 à 5 ans", question: "Où te vois-tu dans 3 à 5 ans ?", reponse: "Je me vois CRO Manager ou Growth Manager, avec une vraie expertise en personnalisation et en data. Le luxe m'attire beaucoup, et LVMH en particulier : je pense que le CRO a un rôle énorme à jouer dans un secteur où chaque détail de l'expérience utilisateur compte." }
+    ],
+    marques: ["Showroomprivé"],
+    outils: [
+      { nom: "AB Tasty", usage: "Conception et pilotage des tests A/B" },
+      { nom: "Confluence", usage: "Documenter et partager la connaissance" },
+      { nom: "Jira", usage: "Suivi des tests et des projets" }
+    ],
+    mentors: [
+      { nom: "Laurent Babicz de Salettes", relation: "mentor", expertise: "", organisation: "Showroomprivé", citation: "Mon tuteur en alternance chez Showroomprivé. C'est lui qui m'a introduit au monde du CRO et qui a cru en moi dès le départ !", lienLinkedin: "", photo: "images/inspirations/laurent-babicz-de-salettes.jpg" }
+    ],
+    sujets: ["Personnalisation", "Emotion AI"],
+    aRetenir: {
+      synthese: true,
+      points: [
+        { titre: "La rigueur fait le résultat.", texte: "Une idée simple peut produire un gros impact si l'hypothèse, le ciblage et l'analyse sont solides." },
+        { titre: "Intuition et data vont ensemble.", texte: "L'intuition génère les hypothèses, la data les valide ou les infirme." },
+        { titre: "Le CRO se pense dans la durée.", texte: "Un programme CRO est un investissement stratégique fondé sur l'apprentissage continu." }
+      ]
+    },
+    motsCles: ["Curiosité"]
   }
 ];

@@ -173,7 +173,7 @@ main{flex:1;width:100%;max-width:1320px;margin:0 auto;padding:0 var(--pad) 96px}
 .crumbs{padding:22px 0 0;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:13px}
 .crumbs a{text-decoration:none;white-space:nowrap}.crumbs a:hover{text-decoration:underline}
 .crumbs span{display:flex;gap:16px}
-.ph{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,.55fr);gap:clamp(24px,4vw,64px);align-items:start;padding:12px 0 0}
+.ph{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(24px,4vw,64px);align-items:end;padding:12px 0 0}
 .ph-txt{display:flex;flex-direction:column;gap:20px;align-items:flex-start;padding-bottom:8px}
 .ph h1{display:flex;flex-direction:column;gap:16px;font-weight:400}
 .ph-name{font-size:clamp(56px,8.4vw,136px);line-height:.86;letter-spacing:-.06em;font-weight:800;text-wrap:balance}
@@ -182,7 +182,7 @@ main{flex:1;width:100%;max-width:1320px;margin:0 auto;padding:0 var(--pad) 96px}
 .ph-q p{font-size:clamp(22px,2.2vw,30px);font-weight:700;line-height:1.15;letter-spacing:-.03em;max-width:620px;text-wrap:balance}
 .ph-q footer{margin-top:8px;font-family:var(--mono);font-size:12px;color:var(--muted2)}
 .ph-meta{font-size:12px;color:var(--muted2)}
-.ph-photo .portrait{width:100%;aspect-ratio:4/5;height:auto;max-height:min(60vh,520px);min-height:0}
+.ph-photo .portrait{width:100%;aspect-ratio:auto;height:min(50vh,460px);min-height:340px}
 .intro{margin:clamp(48px,6vw,80px) 0 0;max-width:900px}
 .intro p{font-size:clamp(20px,2vw,26px);line-height:1.45;letter-spacing:-.01em}
 .intro p::first-letter{font-weight:800;color:var(--pink)}
@@ -404,8 +404,8 @@ main{flex:1;width:100%;max-width:1320px;margin:0 auto;padding:0 var(--pad) 96px}
   .itb-list>li{grid-template-columns:1fr}
   .feat-grid,.ph,.sec,.method,.tb,.remember{grid-template-columns:1fr}
   .sec-l{position:static}
-  .ph-photo{order:0;max-width:340px}
-  .ph-photo .portrait{height:auto;min-height:0;aspect-ratio:1/1}
+  .ph-photo{order:-1}
+  .ph-photo .portrait{height:auto;min-height:0;aspect-ratio:4/3}
   .feat-photo{max-width:440px}
 }
 @media (max-width:640px){

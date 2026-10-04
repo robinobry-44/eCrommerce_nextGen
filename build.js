@@ -472,7 +472,7 @@ function buildSite(SITE, RAW, opts) {
             `<ol>${pts.map((x, k) => `<li><span class="r-n">${pad(k + 1)}</span><h3>${esc(x.titre)}</h3>${x.texte ? `<p>${esc(x.texte)}</p>` : ''}</li>`).join('')}</ol></section>`;
         }
         if (p.motFin) {
-          h += `<section class="motfin" aria-labelledby="mf-h"><h2 class="eyebrow" id="mf-h">Le mot de la fin ${esc(dP)}</h2><p class="s">Le CRO sans</p><p class="w">${esc(p.motFin)}</p><p class="s">ce n'est pas du CRO.</p>` +
+          h += `<section class="motfin" aria-labelledby="mf-h"><h2 class="eyebrow" id="mf-h">Le mot de la fin ${esc(dP)}</h2><p class="s">Le CRO sans</p><p class="w" style="--n:${[...String(p.motFin)].length}">${esc(p.motFin)}</p><p class="s">ce n'est pas du CRO.</p>` +
             `<p class="mf-a">— ${esc(p.nom)}</p><a class="link-arrow" href="${L('mur-de-mots/')}">Voir le mur des mots →</a></section>`;
         }
         h += '</article>';
@@ -551,7 +551,7 @@ function buildSite(SITE, RAW, opts) {
       return `<section class="page-head"><p class="eyebrow pinkd">#MotClé · ${plural(groups.length, 'talent', 'talents')}</p><h1 class="h1">Le CRO sans <span class="ul">[…]</span>, ce n'est pas du CRO.</h1></section>` +
         `<div class="wall">${groups.map((p, k) => {
           const r = sizes[k % sizes.length], c = palette[k % 3];
-          return `<a class="wgroup" href="${L(p.path)}"><span class="words">${p.motsCles.map((w, j) => { const rr = j ? r * 0.55 : r; return `<span class="word" style="font-size:clamp(${Math.round(32 + 40 * rr)}px,${(4 + 8 * rr).toFixed(1)}vw,${Math.round(64 + 100 * rr)}px);font-weight:${rr > 0.7 ? 800 : (k % 2 ? 500 : 700)};color:${c};-webkit-text-stroke:${c === 'transparent' ? '1.5px #FFF7FA' : '0'}">${esc(w)}</span>`; }).join('')}</span><span class="by">${esc(p.nom)}</span></a>`;
+          return `<a class="wgroup" href="${L(p.path)}"><span class="words">${p.motsCles.map((w, j) => { const rr = j ? r * 0.55 : r; return `<span class="word" style="font-size:min(clamp(${Math.round(32 + 40 * rr)}px,${(4 + 8 * rr).toFixed(1)}vw,${Math.round(64 + 100 * rr)}px),calc((100vw - 110px) / ${([...String(w)].length * 0.72).toFixed(2)}));font-weight:${rr > 0.7 ? 800 : (k % 2 ? 500 : 700)};color:${c};-webkit-text-stroke:${c === 'transparent' ? '1.5px #FFF7FA' : '0'}">${esc(w)}</span>`; }).join('')}</span><span class="by">${esc(p.nom)}</span></a>`;
         }).join('')}</div><p class="mono small" style="margin-top:14px">Regroupés par talent · cliquez pour découvrir la personne.</p>`;
     }
   });

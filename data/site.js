@@ -124,7 +124,8 @@ window.SITE = {
     "Shopify": "Plateforme e-commerce",
     "Welyft A/B Tests Identifier": "Veille A/B tests",
     "Confluence": "Documentation",
-    "Jira": "Gestion de projet"
+    "Jira": "Gestion de projet",
+    "Air360": "Experience Analytics"
   },
 
   // LOGOS : nom officiel (outil OU entreprise) → nom de domaine (logo récupéré automatiquement). Sinon : initiales.
@@ -146,6 +147,10 @@ window.SITE = {
     "Amplitude": "amplitude.com",
     "Showroomprivé": "showroomprive.com",
     "Confluence": "atlassian.com",
-    "Jira": "atlassian.com"
+    "Jira": "atlassian.com",
+    "CEWE": "cewe.fr",
+    "Croix-Rouge française": "croix-rouge.fr",
+    "Orange": "orange.fr",
+    "Air360": "air360.io"
   }
 };

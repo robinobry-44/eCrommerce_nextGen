@@ -223,7 +223,7 @@ main{flex:1;width:100%;max-width:1320px;margin:0 auto;padding:0 var(--pad) 96px}
 .steps h3{font-size:20px;letter-spacing:-.02em}
 .steps p{font-size:15px;color:var(--text2)}
 .xxl{margin:clamp(72px,9vw,128px) 0 0;min-height:min(80vh,760px);background:var(--soft);border-radius:40px;padding:clamp(28px,6vw,96px);display:flex;flex-direction:column;justify-content:center;gap:28px}
-.xxl p{font-size:clamp(40px,7.6vw,128px);font-weight:800;line-height:.92;letter-spacing:-.055em;text-wrap:balance;color:var(--ink)}
+.xxl p{font-size:clamp(30px,7.6vw,128px);hyphens:auto;overflow-wrap:break-word;font-weight:800;line-height:.92;letter-spacing:-.055em;text-wrap:balance;color:var(--ink)}
 .xxl figcaption{font-family:var(--mono);font-size:13px;color:var(--pink-d)}
 .xxl figcaption strong{color:var(--ink)}
 .tb{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.6fr);gap:clamp(20px,4vw,64px);padding-top:clamp(48px,6vw,80px);align-items:start}
@@ -259,7 +259,7 @@ main{flex:1;width:100%;max-width:1320px;margin:0 auto;padding:0 var(--pad) 96px}
 .remember p{font-size:17px;color:var(--text2)}
 .motfin{margin-top:clamp(56px,7vw,96px);display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;padding:32px 0}
 .motfin .s{font-size:clamp(22px,3vw,34px);letter-spacing:-.02em}
-.motfin .w{font-size:clamp(72px,14vw,200px);font-weight:800;line-height:.85;background:var(--pink);color:#fff;border-radius:.22em;padding:.08em .24em;font-family:var(--round);letter-spacing:-.03em}
+.motfin .w{font-size:min(clamp(72px,14vw,200px),calc((100vw - 48px) / (var(--n,8) * .62 + .6)));max-width:100%;overflow-wrap:anywhere;font-weight:800;line-height:.85;background:var(--pink);color:#fff;border-radius:.22em;padding:.08em .24em;font-family:var(--round);letter-spacing:-.03em}
 .mf-a{font-family:var(--mono);font-size:12px;color:var(--muted2)}
 .related{margin-top:clamp(64px,8vw,112px);padding-top:32px;border-top:1.5px solid var(--ink);display:flex;flex-direction:column;gap:32px}
 .pn{margin-top:56px;border-top:1px solid var(--line);padding-top:24px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}

@@ -69,6 +69,12 @@ main{flex:1;width:100%;max-width:1320px;margin:0 auto;padding:0 var(--pad) 96px}
 .ip-i,.rwl-i,.ip-txt{min-width:0}
 .btn-li{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:#0A66C2;color:#fff;text-decoration:none;font-weight:700;font-size:15px;padding:12px 18px;border-radius:999px}
 .btn-li:hover{background:#004182;color:#fff}
+.btn-li .li-ico{flex:none}
+.ph-txt .btn-li{font-size:16px;padding:13px 22px}
+.li-cta{margin-top:clamp(56px,7vw,96px);display:flex;align-items:center;justify-content:space-between;gap:20px 32px;flex-wrap:wrap;background:var(--soft);border-radius:32px;padding:clamp(24px,4vw,48px)}
+.li-cta>div{max-width:640px;display:flex;flex-direction:column;gap:10px}
+.li-cta p:not(.eyebrow){color:var(--text2);line-height:1.5}
+.li-cta .btn-li{align-self:center}
 .tag-sample{align-self:flex-start;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;border:1px solid var(--line);border-radius:999px;padding:2px 8px;color:var(--muted2);background:var(--bg)}
 
 /* portraits */

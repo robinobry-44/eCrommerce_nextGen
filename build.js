@@ -241,6 +241,8 @@ function buildSite(SITE, RAW, opts) {
     return `<span class="logo" style="width:${size}px;height:${size}px;border-radius:${Math.round(size * 0.3)}px;font-size:${Math.round(size * 0.34)}px">` +
       (d ? `<img src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(d)}&amp;sz=128" alt="${deco ? '' : 'Logo ' + esc(name)}" width="${Math.round(size * 0.6)}" height="${Math.round(size * 0.6)}" loading="lazy" onerror="this.parentNode.textContent='${esc(initials(name))}'">` : `<span aria-hidden="true">${esc(initials(name))}</span>`) + '</span>';
   }
+  const LI_ICON = '<svg class="li-ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>';
+  const liBtn = (p, first, where) => p.lienLinkedin ? `<a class="btn-li" href="${esc(p.lienLinkedin)}" target="_blank" rel="noopener" data-cta="linkedin-${where}" data-talent="${esc(p.slug)}" aria-label="Se connecter avec ${esc(first)} sur LinkedIn (nouvel onglet)">${LI_ICON}<span>Se connecter avec ${esc(first)}</span></a>` : '';
   const xps = () => ''; // badges d'expertise masqués (les expertises restent dans « En bref », les filtres et le JSON-LD)
   const co = (name, size, cls) => `<span class="co${cls ? ' ' + cls : ''}">${logo(name, size || 32, true)}<strong>${esc(name)}</strong></span>`;
   const sample = p => p.exemple ? '<span class="tag-sample">Profil d\'exemple</span>' : '';
@@ -395,7 +397,7 @@ function buildSite(SITE, RAW, opts) {
         h += `<header class="ph"><div class="ph-txt"><p class="eyebrow pinkd">NEXTGEN #${p.num} · Promo ${esc(p.promo)}</p>` +
           `<h1><span class="ph-name">${esc(p.nom)}</span><span class="vh"> — </span><span class="ph-role">${esc(p.poste)}<span class="vh"> chez </span></span>${co(p.entreprise, 40, 'co-lg')}</h1>` +
           xps(p.expertises) + (p.citation ? `<blockquote class="ph-q"><p>« ${esc(p.citation)} »</p><footer>— ${esc(p.nom)}</footer></blockquote>` : '') + sample(p) +
-          `<p class="ph-meta mono">Interview par <a href="${L('a-propos/')}">${esc(AUTHOR.nom || '')}</a>${p.dateLabel ? ` · <time datetime="${p.date}">${esc(p.dateLabel)}</time>` : ''}${p.lienLinkedin ? ` · <a href="${esc(p.lienLinkedin)}" target="_blank" rel="noopener">LinkedIn de ${esc(P)} ↗</a>` : ''}</p></div>` +
+          `<p class="ph-meta mono">Interview par <a href="${L('a-propos/')}">${esc(AUTHOR.nom || '')}</a>${p.dateLabel ? ` · <time datetime="${p.date}">${esc(p.dateLabel)}</time>` : ''}</p>${liBtn(p, P, 'hero')}</div>` +
           `<div class="ph-photo">${portrait(p, L, { eager: true, cls: 'xl', sizes: '(max-width: 900px) 100vw, 45vw' })}</div></header>`;
         h += `<section class="intro" aria-label="Introduction"><p>${esc(p.intro || autoIntro)}</p></section>`;
 
@@ -475,6 +477,7 @@ function buildSite(SITE, RAW, opts) {
           h += `<section class="motfin" aria-labelledby="mf-h"><h2 class="eyebrow" id="mf-h">Le mot de la fin ${esc(dP)}</h2><p class="s">Le CRO sans</p><p class="w" style="--n:${[...String(p.motFin)].length}">${esc(p.motFin)}</p><p class="s">ce n'est pas du CRO.</p>` +
             `<p class="mf-a">— ${esc(p.nom)}</p><a class="link-arrow" href="${L('mur-de-mots/')}">Voir le mur des mots →</a></section>`;
         }
+        if (p.lienLinkedin) h += `<section class="li-cta" aria-labelledby="li-h"><div><p class="eyebrow">Talents &amp; recruteurs</p><h2 class="h2" id="li-h">Envie d'échanger avec ${esc(P)} ?</h2><p>Connectez-vous avec ${esc(P)} sur LinkedIn pour poursuivre la conversation, partager une opportunité ou échanger sur le CRO et l'e-commerce.</p></div>${liBtn(p, P, 'fin')}</section>`;
         h += '</article>';
         if (sim.length) h += `<section class="related" aria-labelledby="rel-h"><div class="row-between"><h2 class="h2" id="rel-h">Meet more Talents</h2><a class="link-arrow" href="${L('talents/')}">Découvrir tous les Talents →</a></div><div class="pgrid three">${sim.map(x => pcard(x, L, 'h3')).join('')}</div></section>`;
         if (multi) h += `<nav class="pn" aria-label="Profil précédent et suivant"><a href="${L(prev.path)}" rel="prev"><span>← Précédent</span><span>${esc(prev.nom)}</span></a><a class="r" href="${L(next.path)}" rel="next"><span>Suivant →</span><span>${esc(next.nom)}</span></a></nav>`;

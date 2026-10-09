@@ -15,7 +15,7 @@ window.SITE = {
   promoActuelle: "2026",
 
   // Adresse publique du site (sans / final) : canoniques, sitemap, aperçus LinkedIn, JSON-LD.
-  url: "https://ecrommerce-nextgen.pages.dev",
+  url: "https://ecrommerce-nextgen.fr",
 
   // Lien d'invitation du groupe WhatsApp
   whatsapp: "https://chat.whatsapp.com/",

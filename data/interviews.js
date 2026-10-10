@@ -88,7 +88,7 @@ window.INTERVIEWS = [
     featured: true,
     photo: "images/interviews/antoine-vera.jpg",
     photos: [],
-    lienLinkedin: "",
+    lienLinkedin: "https://www.linkedin.com/in/antoine-v-6950341a4/",
     expertises: ["CRO", "E-commerce", "Experimentation", "Data"],
     citation: "Le CRO est un métier de couture plus qu'un métier d'outil.",
     accroche: "Un simple test A/B ou la suppression d'une friction peut générer plus d'impact qu'une campagne marketing.",

@@ -256,7 +256,7 @@ function buildSite(SITE, RAW, opts) {
   const attribution = p => `<strong>${esc(p.nom)}</strong> — ${esc(p.poste)}, ${esc(p.entreprise)}`;
 
   /* ---------- JSON-LD communs ---------- */
-  const ORG = { '@type': 'Organization', '@id': abs('#organization'), name: BRAND, alternateName: NAME, url: abs(''), logo: abs('images/favicon.png'), image: abs('images/og-image.png') };
+  const ORG = { '@type': 'Organization', '@id': abs('#organization'), name: BRAND, alternateName: NAME, url: abs(''), logo: { '@type': 'ImageObject', url: abs('images/icon-512.png'), width: 512, height: 512 }, image: abs('images/og-image.png') };
   if (has(LINKS.linkedin)) ORG.sameAs = [LINKS.linkedin];
   const ROBIN = { '@type': 'Person', '@id': abs('a-propos/#auteur'), name: AUTHOR.nom || '', url: abs('a-propos/') };
   if (AUTHOR.poste) ROBIN.jobTitle = AUTHOR.poste;
@@ -293,7 +293,7 @@ function buildSite(SITE, RAW, opts) {
       `<meta property="og:image:alt" content="${esc(o.imageAlt || BRAND)}">\n` +
       (o.published ? `<meta property="article:published_time" content="${o.published}">\n` + (has(AUTHOR.nom) ? `<meta property="article:author" content="${esc(AUTHOR.nom)}">\n` : '') : '') +
       `<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:title" content="${esc(o.title)}">\n<meta name="twitter:description" content="${esc(o.desc)}">\n<meta name="twitter:image" content="${esc(img)}">\n` +
-      `<link rel="icon" type="image/png" href="${L.a('images/favicon.png')}">\n<link rel="apple-touch-icon" href="${L.a('images/apple-touch-icon.png')}">\n` +
+      `<link rel="icon" href="${L.a('favicon.ico')}" sizes="48x48">\n<link rel="icon" type="image/png" sizes="96x96" href="${L.a('images/icon-96.png')}">\n<link rel="icon" type="image/png" sizes="192x192" href="${L.a('images/icon-192.png')}">\n<link rel="apple-touch-icon" sizes="180x180" href="${L.a('images/apple-touch-icon.png')}">\n<meta name="theme-color" content="#FFE3EE">\n` +
       (o.preload ? `<link rel="preload" as="image" href="${esc(L.a(o.preload))}" fetchpriority="high">\n` : '') +
       '<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n' +
       '<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Nunito:wght@800;900&amp;display=swap" rel="stylesheet">\n' +
@@ -670,6 +670,8 @@ if (typeof require !== 'undefined' && typeof module !== 'undefined' && require.m
   fs.rmSync(OUT, { recursive: true, force: true });
   Object.keys(res.files).forEach(f => { const p = path.join(OUT, f); fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, res.files[f]); });
   ['assets', 'images'].forEach(d => { if (fs.existsSync(path.join(ROOT, d))) fs.cpSync(path.join(ROOT, d), path.join(OUT, d), { recursive: true }); });
+  // favicon.ico à la racine : c'est là que Google et les navigateurs le cherchent par défaut
+  if (fs.existsSync(path.join(ROOT, 'images', 'favicon.ico'))) fs.copyFileSync(path.join(ROOT, 'images', 'favicon.ico'), path.join(OUT, 'favicon.ico'));
   console.log(`✓ ${Object.keys(res.files).length} fichiers générés dans dist/ · ${res.count.people} Talents, ${res.count.outils} outils (${res.count.pagesOutils} pages), ${res.count.insights} insights` + (res.warnings.length ? ` · ⚠ ${res.warnings.length} avertissement(s) ci-dessus` : ''));
   if (args.indexOf('--strict') >= 0 && res.warnings.length) process.exit(1);
 }

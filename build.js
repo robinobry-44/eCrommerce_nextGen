@@ -242,7 +242,7 @@ function buildSite(SITE, RAW, opts) {
       (d ? `<img src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(d)}&amp;sz=128" alt="${deco ? '' : 'Logo ' + esc(name)}" width="${Math.round(size * 0.6)}" height="${Math.round(size * 0.6)}" loading="lazy" onerror="this.parentNode.textContent='${esc(initials(name))}'">` : `<span aria-hidden="true">${esc(initials(name))}</span>`) + '</span>';
   }
   const LI_ICON = '<svg class="li-ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>';
-  const liBtn = (p, first, where) => p.lienLinkedin ? `<a class="btn-li" href="${esc(p.lienLinkedin)}" target="_blank" rel="noopener" data-cta="linkedin-${where}" data-talent="${esc(p.slug)}" aria-label="Se connecter avec ${esc(first)} sur LinkedIn (nouvel onglet)">${LI_ICON}<span>Se connecter avec ${esc(first)}</span></a>` : '';
+  const liBtn = (p, first, where) => p.lienLinkedin ? `<a class="btn-li" href="${esc(p.lienLinkedin)}" target="_blank" rel="noopener" data-cta="linkedin-${where}" data-talent="${esc(p.slug)}" data-umami-event="linkedin-talent" data-umami-event-talent="${esc(p.slug)}" data-umami-event-position="${where}" aria-label="Se connecter avec ${esc(first)} sur LinkedIn (nouvel onglet)">${LI_ICON}<span>Se connecter avec ${esc(first)}</span></a>` : '';
   const xps = () => ''; // badges d'expertise masqués (les expertises restent dans « En bref », les filtres et le JSON-LD)
   const co = (name, size, cls) => `<span class="co${cls ? ' ' + cls : ''}">${logo(name, size || 32, true)}<strong>${esc(name)}</strong></span>`;
   const sample = p => p.exemple ? '<span class="tag-sample">Profil d\'exemple</span>' : '';
@@ -294,6 +294,7 @@ function buildSite(SITE, RAW, opts) {
       (o.published ? `<meta property="article:published_time" content="${o.published}">\n` + (has(AUTHOR.nom) ? `<meta property="article:author" content="${esc(AUTHOR.nom)}">\n` : '') : '') +
       `<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:title" content="${esc(o.title)}">\n<meta name="twitter:description" content="${esc(o.desc)}">\n<meta name="twitter:image" content="${esc(img)}">\n` +
       `<link rel="icon" href="${L.a('favicon.ico')}" sizes="48x48">\n<link rel="icon" type="image/png" sizes="96x96" href="${L.a('images/icon-96.png')}">\n<link rel="icon" type="image/png" sizes="192x192" href="${L.a('images/icon-192.png')}">\n<link rel="apple-touch-icon" sizes="180x180" href="${L.a('images/apple-touch-icon.png')}">\n<meta name="theme-color" content="#FFE3EE">\n` +
+      (has(SITE.umami) ? `<script defer src="https://cloud.umami.is/script.js" data-website-id="${esc(SITE.umami)}"${BASE ? ` data-domains="${esc(BASE.replace(/^https?:\/\//, ''))}"` : ''}></script>\n` : '') +
       (o.preload ? `<link rel="preload" as="image" href="${esc(L.a(o.preload))}" fetchpriority="high">\n` : '') +
       '<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n' +
       '<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Nunito:wght@800;900&amp;display=swap" rel="stylesheet">\n' +
@@ -301,7 +302,7 @@ function buildSite(SITE, RAW, opts) {
       (graph.length ? `<script type="application/ld+json">${json({ '@context': 'https://schema.org', '@graph': graph })}</script>\n` : '') +
       '</head>\n<body>\n<a class="skip" href="#main">Aller au contenu</a>\n<div class="wrap">\n' +
       `<header class="hdr"><div class="hdr-in"><a class="brand" href="${L('')}"><span class="brand-logo"><img src="${L.a('images/mascotte.png')}" alt="" width="46" height="46"></span><span class="brand-name">${esc(NAME)}</span></a>` +
-      `<nav class="nav" aria-label="Navigation principale">${NAV.map(n => `<a href="${L(n[1])}"${o.nav === n[0] ? ' class="on" aria-current="page"' : ''}>${esc(n[2])}</a>`).join('')}<a class="nav-cta" href="${L('communaute/')}"${o.nav === 'communaute' ? ' aria-current="page"' : ''}>Rejoindre la communauté</a></nav></div></header>\n` +
+      `<nav class="nav" aria-label="Navigation principale">${NAV.map(n => `<a href="${L(n[1])}"${o.nav === n[0] ? ' class="on" aria-current="page"' : ''}>${esc(n[2])}</a>`).join('')}<a class="nav-cta" href="${L('communaute/')}" data-umami-event="cta-communaute" data-umami-event-position="header"${o.nav === 'communaute' ? ' aria-current="page"' : ''}>Rejoindre la communauté</a></nav></div></header>\n` +
       `<main id="main">\n${main}\n</main>\n` +
       `<footer class="ftr"><div class="ftr-in"><nav class="ftr-nav" aria-label="Pied de page">${FOOTLINKS.map(l => `<a href="${L(l[0])}">${esc(l[1])}</a>`).join('')}</nav><div class="ftr-meta"><span>${esc(f.gauche || '')}</span><span>${esc(f.droite || '')}</span></div></div></footer>\n</div>\n` +
       (o.script ? `<script src="${L.a('assets/js/app.js')}" defer></script>\n` : '') + '</body>\n</html>\n';
@@ -310,7 +311,7 @@ function buildSite(SITE, RAW, opts) {
   }
   const joinBlock = (L, title) => `<section class="join" aria-labelledby="join-h"><div class="join-txt"><p class="eyebrow">Communauté</p><h2 class="join-h" id="join-h">${title || 'Join the Next Gen'}</h2>` +
     `<p>Vous connaissez une future pépite du CRO ou de l'e-commerce ? Proposez-la. Vous voulez échanger avec les Talents et les passionnés de CRO ? Rejoignez la communauté.</p>` +
-    `<div class="ctas">${PROPOSER ? `<a class="btn dark" href="${esc(PROPOSER)}" target="_blank" rel="noopener">Proposer un talent →</a>` : ''}<a class="btn white" href="${L('communaute/')}">Rejoindre la communauté</a></div></div>${mascot(L, 260)}</section>`;
+    `<div class="ctas">${PROPOSER ? `<a class="btn dark" href="${esc(PROPOSER)}" target="_blank" rel="noopener" data-umami-event="proposer-talent">Proposer un talent →</a>` : ''}<a class="btn white" href="${L('communaute/')}">Rejoindre la communauté</a></div></div>${mascot(L, 260)}</section>`;
 
   /* ---------- ACCUEIL ---------- */
   page({
@@ -447,7 +448,7 @@ function buildSite(SITE, RAW, opts) {
             const fiche = byName[norm(m.nom)], mo = mentorOf(m.nom);
             return `<div class="insp-i">${avatar(m.nom, m.photo, 56, L)}<div><h3>${fiche ? `<a href="${L(fiche.path)}">${esc(m.nom)}</a>` : `<a href="${L('inspirations/')}#p-${mo.slug}">${esc(m.nom)}</a>`}</h3><p class="rel">${REL[m.relation].tag}</p>` +
               ((m.expertise || m.organisation) ? `<p class="insp-x">${[m.expertise, m.organisation].filter(Boolean).map(esc).join(' · ')}</p>` : '') +
-              (m.citation ? `<p>${esc(m.citation)}</p>` : '') + `<a class="mono small" href="${esc(m.lienLinkedin || liSearch(m.nom))}" target="_blank" rel="noopener">LinkedIn de ${esc(first(m.nom))} ↗</a></div></div>`;
+              (m.citation ? `<p>${esc(m.citation)}</p>` : '') + `<a class="mono small" href="${esc(m.lienLinkedin || liSearch(m.nom))}" target="_blank" rel="noopener" data-umami-event="linkedin-mentor" data-umami-event-mentor="${esc(m.nom)}">LinkedIn de ${esc(first(m.nom))} ↗</a></div></div>`;
           }).join('')}</div>`, 'sec-insp');
         }
         if (p.ressources.length) {
@@ -511,7 +512,7 @@ function buildSite(SITE, RAW, opts) {
           MENTORS.map(m => `<article class="ip-i${m.by.length > 1 ? ' multi' : ''}" id="p-${m.slug}">${portrait({ nom: m.nom, photo: m.photo, photos: [] }, L, { cls: 'ip-portrait' })}<div class="ip-txt"><h3>${esc(m.nom)}</h3>` +
             ((m.expertise || m.organisation) ? `<p class="insp-x">${[m.expertise, m.organisation].filter(Boolean).map(esc).join(' · ')}</p>` : '') +
             m.by.map(x => `<div class="ip-cite">${x.citation ? `<p>« ${esc(x.citation)} »</p>` : ''}<a class="link-arrow" href="${L(x.p.path)}">${REL[x.relation].by} ${esc(x.p.nom)} →</a></div>`).join('') +
-            `<a class="mono small" href="${esc(m.lien || liSearch(m.nom))}" target="_blank" rel="noopener">LinkedIn de ${esc(first(m.nom))} ↗</a></div></article>`).join('') + '</div></section>';
+            `<a class="mono small" href="${esc(m.lien || liSearch(m.nom))}" target="_blank" rel="noopener" data-umami-event="linkedin-mentor" data-umami-event-mentor="${esc(m.nom)}">LinkedIn de ${esc(first(m.nom))} ↗</a></div></article>`).join('') + '</div></section>';
       }
       if (TOOLS.length) {
         k++;
@@ -568,9 +569,9 @@ function buildSite(SITE, RAW, opts) {
       const WA = 'https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg';
       return `<section class="wa"><div class="wa-txt"><p class="wa-tag">Communauté WhatsApp</p><h1>Rejoins la communauté <span>${esc(NAME)}</span></h1><p>Le groupe où les Talents et les passionnés de CRO se retrouvent pour avancer ensemble.</p>` +
         `<ul class="wa-perks"><li><strong>Échanges</strong><span>Tests, méthodes, retours d'expérience entre pairs.</span></li><li><strong>Jobs &amp; stages</strong><span>Offres partagées par la communauté.</span></li><li><strong>Veille &amp; outils</strong><span>Les bons plans, articles et nouveautés du moment.</span></li></ul>` +
-        (has(SITE.whatsapp) ? `<a class="wa-btn" href="${esc(SITE.whatsapp)}" target="_blank" rel="noopener"><img src="${WA}" alt="" width="34" height="34">Rejoindre le groupe WhatsApp →</a>` : '') + '</div>' +
+        (has(SITE.whatsapp) ? `<a class="wa-btn" href="${esc(SITE.whatsapp)}" target="_blank" rel="noopener" data-umami-event="whatsapp"><img src="${WA}" alt="" width="34" height="34">Rejoindre le groupe WhatsApp →</a>` : '') + '</div>' +
         `<div class="wa-art" aria-hidden="true"><span class="wa-bubble">Miam, on t'attend !</span><div class="wa-frame"><div class="box"><img src="${L.a('images/mascotte.png')}" alt="" width="349" height="246"></div><img src="${WA}" alt="" width="120" height="120"></div></div></section>` +
-        `<section class="sec"><div class="sec-l"><p class="eyebrow pinkd">Proposer un talent</p><h2 class="sec-h">Qui sera la prochaine Next Gen ?</h2></div><div class="sec-b"><p>Mentionnez-la en commentaire sur LinkedIn pour que ${esc(first(AUTHOR.nom))} aille à sa rencontre. La prochaine Next Gen est peut-être déjà dans votre réseau.</p>${PROPOSER ? `<p><a class="btn" href="${esc(PROPOSER)}" target="_blank" rel="noopener">Proposer un talent →</a></p>` : ''}</div></section>` +
+        `<section class="sec"><div class="sec-l"><p class="eyebrow pinkd">Proposer un talent</p><h2 class="sec-h">Qui sera la prochaine Next Gen ?</h2></div><div class="sec-b"><p>Mentionnez-la en commentaire sur LinkedIn pour que ${esc(first(AUTHOR.nom))} aille à sa rencontre. La prochaine Next Gen est peut-être déjà dans votre réseau.</p>${PROPOSER ? `<p><a class="btn" href="${esc(PROPOSER)}" target="_blank" rel="noopener" data-umami-event="proposer-talent">Proposer un talent →</a></p>` : ''}</div></section>` +
         `<section class="sec"><div class="sec-l"><p class="eyebrow pinkd">Le mur des mots</p><h2 class="sec-h">Le CRO sans […], ce n'est pas du CRO.</h2></div><div class="sec-b"><p>Chaque interview se termine par un mot. Réunis, ils dessinent ce que la nouvelle génération met au cœur du métier : ${groups.slice(0, 6).map(p => `<a href="${L(p.path)}">${esc(p.motFin.toLowerCase())}</a>`).join(', ')}…</p><p><a class="link-arrow" href="${L('mur-de-mots/')}">Voir le mur des mots →</a></p></div></section>`;
     }
   });

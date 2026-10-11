@@ -19,6 +19,8 @@ window.SITE = {
 
   // Lien d'invitation du groupe WhatsApp
   whatsapp: "https://chat.whatsapp.com/",
+  // Mesure d'audience Umami (sans cookies). Laisser "" pour désactiver.
+  umami: "54d4c03c-91d7-4ef1-9fe1-42edb0d71b9d",
 
   liens: {
     linkedin: "https://www.linkedin.com/in/robinaubry",       // profil de l'auteur

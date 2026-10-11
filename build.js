@@ -452,7 +452,7 @@ function buildSite(SITE, RAW, opts) {
           }).join('')}</div>`, 'sec-insp');
         }
         if (p.ressources.length) {
-          h += sec('Read · Watch · Listen', `Les contenus cités par ${esc(P)}`, `<div class="rwl-mini">${p.ressources.map(r => { const ro = resOf(r.titre); return `<div class="rwl-m"><span class="rtype">${TYPES[r.type]}</span><h3><a href="${L('inspirations/')}#r-${ro.slug}">${esc(r.titre)}</a></h3>${r.auteur ? `<p class="insp-x">${esc(r.auteur)}</p>` : ''}${r.raison ? `<p>« ${esc(r.raison)} »</p>` : ''}<p class="rel">${REL[r.relation].tag}</p></div>`; }).join('')}</div>`);
+          h += sec('Read · Watch · Listen', `Les contenus cités par ${esc(P)}`, `<div class="rwl-mini">${p.ressources.map(r => { const ro = resOf(r.titre); return `<div class="rwl-m">${r.image ? `<img class="rwl-thumb" src="${esc(L.a(r.image))}" alt="Couverture : ${esc(r.titre)}" width="96" height="125" loading="lazy">` : ''}<span class="rtype">${TYPES[r.type]}</span><h3><a href="${L('inspirations/')}#r-${ro.slug}">${esc(r.titre)}</a></h3>${r.auteur ? `<p class="insp-x">${esc(r.auteur)}</p>` : ''}${r.raison ? `<p>« ${esc(r.raison)} »</p>` : ''}<p class="rel">${REL[r.relation].tag}</p></div>`; }).join('')}</div>`);
         }
         // Sections libres
         const KNOWN = ['parcours', 'declic', 'mindset', 'conseil', 'hottake'];
@@ -523,7 +523,7 @@ function buildSite(SITE, RAW, opts) {
       if (RESS.length) {
         k++;
         h += `<section class="rwl" id="rwl" aria-labelledby="rwl-h"><div class="ip-head"><p class="eyebrow pinkd">${pad(k)}</p><h2 class="h2" id="rwl-h">Read · Watch · Listen</h2><p class="note">Les livres, podcasts, newsletters et contenus cités par les talents NextGen.</p></div><div class="rwl-grid">` +
-          RESS.map((r, i) => `<article class="rwl-i" id="r-${r.slug}"><div class="cover c${i % 4} t-${r.type}">${r.image ? `<img src="${esc(L.a(r.image))}" alt="Visuel : ${esc(r.titre)}" width="400" height="600" loading="lazy">` : `<span class="cv-type" aria-hidden="true">${TYPES[r.type]}</span><span class="cv-t" aria-hidden="true">${esc(r.titre)}</span>${r.auteur ? `<span class="cv-a" aria-hidden="true">${esc(r.auteur)}</span>` : ''}`}</div>` +
+          RESS.map((r, i) => `<article class="rwl-i" id="r-${r.slug}"><div class="cover c${i % 4} t-${r.type}${r.image ? ' has-img' : ''}">${r.image ? `<img src="${esc(L.a(r.image))}" alt="Couverture : ${esc(r.titre)}${r.auteur ? ' (' + esc(r.auteur) + ')' : ''}" width="400" height="520" loading="lazy">` : `<span class="cv-type" aria-hidden="true">${TYPES[r.type]}</span><span class="cv-t" aria-hidden="true">${esc(r.titre)}</span>${r.auteur ? `<span class="cv-a" aria-hidden="true">${esc(r.auteur)}</span>` : ''}`}</div>` +
             `<span class="rtype">${TYPES[r.type]}</span><h3>${r.lien ? `<a href="${esc(r.lien)}" target="_blank" rel="noopener">${esc(r.titre)} ↗</a>` : esc(r.titre)}</h3>${r.auteur ? `<p class="insp-x">${esc(r.auteur)}</p>` : ''}` +
             r.by.map(x => `${x.raison ? `<p>« ${esc(x.raison)} »</p>` : ''}<a class="link-arrow" href="${L(x.p.path)}">${REL[x.relation].by} ${esc(x.p.nom)} →</a>`).join('') + '</article>').join('') + '</div></section>';
       }

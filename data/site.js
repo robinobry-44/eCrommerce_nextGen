@@ -29,7 +29,8 @@ window.SITE = {
     surtitre: "Newsletter",
     titre: "Ne ratez aucun Talent",
     texte: "Les nouveaux portraits de la Next Gen, directement dans votre boîte mail. Pas de spam, désinscription en un clic.",
-    bouton: "Je m'abonne"
+    bouton: "Je m'abonne",
+    merci: "C'est noté, bienvenue dans la Next Gen ! Pensez à vérifier votre boîte mail (et vos spams) pour confirmer votre inscription."
   },
 
   liens: {

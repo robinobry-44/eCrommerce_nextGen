@@ -278,7 +278,11 @@ function buildSite(SITE, RAW, opts) {
   const NL = SITE.newsletter || {};
   const nlBlock = () => !has(NL.action) ? '' : `<section class="nl" aria-labelledby="nl-h"><div class="nl-txt"><p class="eyebrow">${esc(NL.surtitre || 'Newsletter')}</p><h2 class="nl-h" id="nl-h">${esc(NL.titre || 'Ne ratez aucun Talent')}</h2>${NL.texte ? `<p>${esc(NL.texte)}</p>` : ''}</div>` +
     `<form class="nl-form" action="${esc(NL.action)}" method="post" target="_blank"><label class="vh" for="bd-email">Votre adresse email</label><div class="nl-field"><input type="email" name="email" id="bd-email" placeholder="votre@email.com" autocomplete="email" required><button type="submit" class="btn" data-umami-event="newsletter-subscribe">${esc(NL.bouton || "Je m'abonne")}</button></div>` +
-    (NL.referral ? `<p class="nl-note"><a href="${esc(NL.referral)}" target="_blank" rel="noopener">Powered by Buttondown</a></p>` : '') + '</form></section>';
+    (NL.referral ? `<p class="nl-note"><a href="${esc(NL.referral)}" target="_blank" rel="noopener">Powered by Buttondown</a></p>` : '') +
+    `<p class="nl-ok" role="status" aria-live="polite" hidden>${esc(NL.merci || "C'est noté, merci !")}</p></form>` +
+    // Inscription en arrière-plan : le visiteur reste sur le site et voit le message en français.
+    // Sans JavaScript (ou si l'envoi échoue), le formulaire s'envoie normalement dans un nouvel onglet.
+    `<script>(function(){var f=document.currentScript.previousElementSibling;f.addEventListener('submit',function(e){if(!window.fetch||!window.FormData)return;e.preventDefault();var b=f.querySelector('button');b.disabled=true;fetch(f.action,{method:'POST',mode:'no-cors',body:new FormData(f)}).then(function(){f.querySelector('.nl-field').hidden=true;var n=f.querySelector('.nl-note');if(n)n.hidden=true;f.querySelector('.nl-ok').hidden=false;},function(){b.disabled=false;f.submit();});});})();</script></section>`;
   const FILES = {}, SITEMAP = [];
   function page(o) {
     const L = linker(o.path, o.absolute);

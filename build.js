@@ -275,6 +275,10 @@ function buildSite(SITE, RAW, opts) {
   /* ---------- gabarit ---------- */
   const NAV = [['people', 'talents/', 'Talents'], ['inspirations', 'inspirations/', 'Inspirations']].concat(INSIGHTS.length ? [['insights', 'insights/', 'Insights']] : [], [['apropos', 'a-propos/', 'À propos']]);
   const FOOTLINKS = [['talents/', 'Talents'], ['inspirations/', 'Inspirations'], ['mur-de-mots/', 'Mur des mots'], ['a-propos/', 'À propos'], ['communaute/', 'Communauté']];
+  const NL = SITE.newsletter || {};
+  const nlBlock = () => !has(NL.action) ? '' : `<section class="nl" aria-labelledby="nl-h"><div class="nl-txt"><p class="eyebrow">${esc(NL.surtitre || 'Newsletter')}</p><h2 class="nl-h" id="nl-h">${esc(NL.titre || 'Ne ratez aucun Talent')}</h2>${NL.texte ? `<p>${esc(NL.texte)}</p>` : ''}</div>` +
+    `<form class="nl-form" action="${esc(NL.action)}" method="post" target="_blank"><label class="vh" for="bd-email">Votre adresse email</label><div class="nl-field"><input type="email" name="email" id="bd-email" placeholder="votre@email.com" autocomplete="email" required><button type="submit" class="btn" data-umami-event="newsletter-subscribe">${esc(NL.bouton || "Je m'abonne")}</button></div>` +
+    (NL.referral ? `<p class="nl-note"><a href="${esc(NL.referral)}" target="_blank" rel="noopener">Powered by Buttondown</a></p>` : '') + '</form></section>';
   const FILES = {}, SITEMAP = [];
   function page(o) {
     const L = linker(o.path, o.absolute);
@@ -303,7 +307,7 @@ function buildSite(SITE, RAW, opts) {
       '</head>\n<body>\n<a class="skip" href="#main">Aller au contenu</a>\n<div class="wrap">\n' +
       `<header class="hdr"><div class="hdr-in"><a class="brand" href="${L('')}"><span class="brand-logo"><img src="${L.a('images/mascotte.png')}" alt="" width="46" height="46"></span><span class="brand-name">${esc(NAME)}</span></a>` +
       `<nav class="nav" aria-label="Navigation principale">${NAV.map(n => `<a href="${L(n[1])}"${o.nav === n[0] ? ' class="on" aria-current="page"' : ''}>${esc(n[2])}</a>`).join('')}<a class="nav-cta" href="${L('communaute/')}" data-umami-event="cta-communaute" data-umami-event-position="header"${o.nav === 'communaute' ? ' aria-current="page"' : ''}>Rejoindre la communauté</a></nav></div></header>\n` +
-      `<main id="main">\n${main}\n</main>\n` +
+      `<main id="main">\n${main}\n${o.noindex ? '' : nlBlock()}</main>\n` +
       `<footer class="ftr"><div class="ftr-in"><nav class="ftr-nav" aria-label="Pied de page">${FOOTLINKS.map(l => `<a href="${L(l[0])}">${esc(l[1])}</a>`).join('')}</nav><div class="ftr-meta"><span>${esc(f.gauche || '')}</span><span>${esc(f.droite || '')}</span></div></div></footer>\n</div>\n` +
       (o.script ? `<script src="${L.a('assets/js/app.js')}" defer></script>\n` : '') + '</body>\n</html>\n';
     FILES[o.file || (o.path + 'index.html')] = html;

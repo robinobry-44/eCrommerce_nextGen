@@ -22,6 +22,16 @@ window.SITE = {
   // Mesure d'audience Umami (sans cookies). Laisser "" pour désactiver.
   umami: "54d4c03c-91d7-4ef1-9fe1-42edb0d71b9d",
 
+  // Newsletter Buttondown : bloc d'inscription affiché en bas de chaque page. Mettre action: "" pour le masquer.
+  newsletter: {
+    action: "https://buttondown.com/api/emails/embed-subscribe/RobinCRO",
+    referral: "https://buttondown.com/refer/RobinCRO",
+    surtitre: "Newsletter",
+    titre: "Ne ratez aucun Talent",
+    texte: "Les nouveaux portraits de la Next Gen, directement dans votre boîte mail. Pas de spam, désinscription en un clic.",
+    bouton: "Je m'abonne"
+  },
+
   liens: {
     linkedin: "https://www.linkedin.com/in/robinaubry",       // profil de l'auteur
     proposerTalent: "https://www.linkedin.com/in/robinaubry"  // bouton « Proposer un talent »

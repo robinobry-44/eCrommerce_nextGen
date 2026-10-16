@@ -22,6 +22,7 @@
     poste: "CRO Analyst",            // OBLIGATOIRE
     entreprise: "Entreprise",        // OBLIGATOIRE
     typeProfil: "annonceur",         // "annonceur" ou "agence"
+    metier: "cro",                   // facultatif · page Premier job : "cro" · "analytics" · "ux" · "ecommerce"
     secteur: "Retail sport",         // facultatif
     date: "2026-10-15",              // OBLIGATOIRE · date de publication AAAA-MM-JJ
     dateMiseAJour: "",               // facultatif · si l'interview est corrigée
@@ -77,6 +78,7 @@
 window.INTERVIEWS = [
   {
     slug: "antoine-vera",
+    metier: "ecommerce",                 // famille de métier (page Premier job) : cro · analytics · ux · ecommerce
     nom: "Antoine Vera",
     poste: "E-Commerce & CRO Project Manager",
     entreprise: "Sport 2000",
@@ -134,6 +136,7 @@ window.INTERVIEWS = [
   },
   {
     slug: "caroline-hoang",
+    metier: "cro",                 // famille de métier (page Premier job) : cro · analytics · ux · ecommerce
     nom: "Caroline Hoang",
     poste: "Chargée de CRO",
     entreprise: "Showroomprivé",
@@ -190,6 +193,7 @@ window.INTERVIEWS = [
   },
   {
     slug: "salome-klein",
+    metier: "analytics",                 // famille de métier (page Premier job) : cro · analytics · ux · ecommerce
     nom: "Salomé Klein",
     poste: "CRO & Web Analyst",
     entreprise: "CEWE",

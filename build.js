@@ -53,7 +53,7 @@ function buildSite(SITE, RAW, opts) {
     });
   }
   // URL d'une page dans une langue : FR = chemin d'origine, EN = /en/ + premier segment traduit
-  const SEG = { 'mur-de-mots': 'word-wall', 'a-propos': 'about', 'communaute': 'community', 'outils': 'tools', 'proposer-un-talent': 'suggest-a-talent' };
+  const SEG = { 'mur-de-mots': 'word-wall', 'a-propos': 'about', 'communaute': 'community', 'outils': 'tools', 'proposer-un-talent': 'suggest-a-talent', 'premier-job': 'first-job' };
   const loc = (lg, p) => { p = p || ''; if (lg !== 'en') return p; const m = /^([^/#]*)(.*)$/.exec(p); return 'en/' + (m[1] ? (SEG[m[1]] || m[1]) : '') + m[2]; };
 
   const BASE = String(SITE.url || '').replace(/\/+$/, '');
@@ -154,7 +154,8 @@ function buildSite(SITE, RAW, opts) {
       sujets: list(it.sujets).filter(has),
       methode: it.methode && list(it.methode.etapes).length ? it.methode : null,
       aRetenir: it.aRetenir && list(it.aRetenir.points).length ? it.aRetenir : null,
-      motsCles: mots, motFin: mots[0] || ''
+      motsCles: mots, motFin: mots[0] || '',
+      metier: norm(it.metier)
     };
     list(it.mentors).forEach((m, j) => { if (!m || !has(m.nom || m)) warn(where + ' : le mentor n°' + (j + 1) + ' n\'a pas de nom.'); });
     list(it.mentors).concat(list(it.ressources)).forEach(x => { if (x && has(x.relation) && !REL[norm(x.relation)]) warn(where + ' : relation « ' + x.relation + ' » inconnue (' + Object.keys(REL).join(', ') + ').'); });
@@ -253,6 +254,29 @@ function buildSite(SITE, RAW, opts) {
     sections: list(x.sections).map(s => ({ titre: s.titre || '', texte: list(s.texte), people: list(s.people).map(sl => { if (!bySlug[sl]) warn('Insight « ' + x.slug + ' » : Talents inconnu « ' + sl + ' ».'); return bySlug[sl]; }).filter(Boolean) }))
   })).sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 
+  /* ---------- Premier job (facultatif) : offres juniors ---------- */
+  const JOBS_RAW = opts.jobs || null;
+  const METIERS = [
+    { key: 'cro', nom: tr('CRO & expérimentation', 'CRO & experimentation') },
+    { key: 'analytics', nom: tr('Web & data analytics', 'Web & data analytics') },
+    { key: 'ecommerce', nom: 'E-commerce' },
+    { key: 'ux', nom: tr('UX & recherche utilisateur', 'UX & user research') }
+  ];
+  const CONTRATS = { stage: tr('Stage', 'Internship'), alternance: tr('Alternance', 'Work-study'), cdi: tr('CDI', 'Permanent'), cdd: tr('CDD', 'Fixed-term') };
+  const JOBS = JOBS_RAW ? list(JOBS_RAW.offres).filter(j => j && has(j.titre) && has(j.lien)).filter(j => {
+    if (!METIERS.some(m => m.key === norm(j.metier))) warn('Offre « ' + j.titre + ' » : metier « ' + j.metier + ' » inconnu (cro, analytics, ux, ecommerce).');
+    if (has(j.expire) && j.expire < today) return false; // offre expirée : retirée automatiquement
+    return true;
+  }).map(j => ({ titre: j.titre, entreprise: j.entreprise || '', metier: norm(j.metier), contrat: norm(j.contrat), ville: j.ville || '', lien: j.lien, outils: list(j.outils).map(canon), pourquoi: ENG ? (j.pourquoiEn || j.pourquoi || '') : (j.pourquoi || '') })) : [];
+  const JOBS_MAJ = JOBS_RAW && /^\d{4}-\d{2}-\d{2}$/.test(JOBS_RAW.majLe || '') ? JOBS_RAW.majLe : '';
+  // Premier pas d'un talent : 1re expérience du parcours (+ type de contrat s'il est indiqué)
+  const firstStep = p => {
+    const e = p.careerPath.find(c => c.type !== 'formation');
+    if (!e) return null;
+    const d = norm(e.detail || ''), contrat = /altern|work-study|apprenti/.test(d) ? CONTRATS.alternance : /stage|intern/.test(d) ? CONTRATS.stage : '';
+    return { entreprise: e.etape, contrat };
+  };
+
   /* ---------- liens relatifs ---------- */
   function linker(path, absolute) {
     const depth = path ? path.split('/').filter(Boolean).length : 0;
@@ -329,8 +353,8 @@ function buildSite(SITE, RAW, opts) {
   };
 
   /* ---------- gabarit ---------- */
-  const NAV = [['people', 'talents/', 'Talents'], ['inspirations', 'inspirations/', 'Inspirations']].concat(INSIGHTS.length ? [['insights', 'insights/', 'Insights']] : [], [['apropos', 'a-propos/', tr('À propos', 'About')]]);
-  const FOOTLINKS = [['talents/', 'Talents'], ['inspirations/', 'Inspirations'], ['mur-de-mots/', tr('Mur des mots', 'Word wall')], ['a-propos/', tr('À propos', 'About')]].concat(COMMU ? [['communaute/', tr('Communauté', 'Community')]] : [], EMAIL ? [['proposer-un-talent/', tr('Proposer un talent', 'Suggest a talent')]] : []);
+  const NAV = [['people', 'talents/', 'Talents'], ['inspirations', 'inspirations/', 'Inspirations']].concat(JOBS_RAW ? [['jobs', 'premier-job/', tr('Premier job', 'First job')]] : [], INSIGHTS.length ? [['insights', 'insights/', 'Insights']] : [], [['apropos', 'a-propos/', tr('À propos', 'About')]]);
+  const FOOTLINKS = [['talents/', 'Talents'], ['inspirations/', 'Inspirations']].concat(JOBS_RAW ? [['premier-job/', tr('Premier job', 'First job')]] : [], [ ['mur-de-mots/', tr('Mur des mots', 'Word wall')], ['a-propos/', tr('À propos', 'About')]]).concat(COMMU ? [['communaute/', tr('Communauté', 'Community')]] : [], EMAIL ? [['proposer-un-talent/', tr('Proposer un talent', 'Suggest a talent')]] : []);
   const NL = SITE.newsletter || {};
   const nlBlock = () => !has(NL.action) ? '' : `<section class="nl" aria-labelledby="nl-h"><div class="nl-txt"><p class="eyebrow">${esc(NL.surtitre || 'Newsletter')}</p><h2 class="nl-h" id="nl-h">${esc(NL.titre || tr('Ne ratez aucun Talent', 'Never miss a Talent'))}</h2>${NL.texte ? `<p>${esc(NL.texte)}</p>` : ''}</div>` +
     `<form class="nl-form" action="${esc(NL.action)}" method="post" target="_blank"><label class="vh" for="bd-email">${tr('Votre adresse email', 'Your email address')}</label><div class="nl-field"><input type="email" name="email" id="bd-email" placeholder="${tr('votre@email.com', 'you@email.com')}" autocomplete="email" required><button type="submit" class="btn" data-umami-event="newsletter-subscribe">${esc(NL.bouton || tr("Je m'abonne", 'Subscribe'))}</button></div>` +
@@ -650,6 +674,47 @@ function buildSite(SITE, RAW, opts) {
     }
   });
 
+  /* ---------- PREMIER JOB : premiers pas des talents + offres juniors ---------- */
+  if (JOBS_RAW) page({
+    path: 'premier-job/', nav: 'jobs', priority: '0.8', lastmod: JOBS_MAJ || LAST, script: true, crumbs: [[tr('Premier job', 'First job'), 'premier-job/']],
+    title: tr('Premier job CRO & e-commerce : stages et alternances — ', 'First job in CRO & e-commerce: internships and work-study — ') + BRAND,
+    desc: clamp(ENG ? `How the Next Gen got started, and a hand-picked selection of junior offers in CRO, web analytics, UX and e-commerce (${plural(JOBS.length, 'offer', 'offers')}, France).` : `Comment la Next Gen a démarré, et une sélection d'offres juniors en CRO, web analytics, UX et e-commerce : ${plural(JOBS.length, 'stage ou alternance', 'stages et alternances')} choisis à la main.`),
+    ld: [{ '@type': 'CollectionPage', name: tr('Premier job CRO & e-commerce', 'First job in CRO & e-commerce'), url: U('premier-job/'), inLanguage: INLANG, isPartOf: { '@id': abs('#website') }, dateModified: JOBS_MAJ || undefined }],
+    main: L => {
+      const toolLink = n => { const t = toolOf(n); return t && t.page ? `<a class="chip" href="${L(t.path)}">${esc(n)}</a>` : `<span class="chip">${esc(n)}</span>`; };
+      let h = `<section class="page-head"><p class="eyebrow pinkd">${tr('Premier job', 'First job')}${JOBS_MAJ ? ` · ${tr('sélection mise à jour le', 'selection updated on')} <time datetime="${JOBS_MAJ}">${esc(fmtDate(JOBS_MAJ))}</time>` : ''}</p>` +
+        `<h1 class="h1">${tr('Ils ont commencé là.<br>À votre tour.', 'They started there.<br>Your turn.')}</h1>` +
+        `<p class="lead">${tr("Chaque talent de la Next Gen a fait un premier pas : un stage, une alternance, un premier poste. Voici les leurs, et une sélection d'offres juniors pour faire le vôtre.", 'Every Next Gen talent took a first step: an internship, a work-study contract, a first job. Here are theirs, and a selection of junior offers to take yours.')}</p></section>`;
+      const steps = ALL.map(p => ({ p, f: firstStep(p) })).filter(x => x.f);
+      if (steps.length) {
+        h += `<section class="fp" aria-labelledby="fp-h"><h2 class="eyebrow rule" id="fp-h">${tr('Leur premier pas', 'Their first step')}</h2><ul class="fp-grid">` +
+          steps.map(({ p, f }) => `<li><a class="fp-i" href="${L(p.path)}">${portrait(p, L, { cls: 'sm' })}<span class="fp-txt"><strong>${esc(p.nom)}</strong>` +
+            `<span class="fp-row"><span class="fp-k">${tr('Premier pas', 'First step')}</span>${f.contrat ? esc(f.contrat) + ' · ' : ''}${esc(f.entreprise)}</span>` +
+            `<span class="fp-row"><span class="fp-k">${tr("Aujourd'hui", 'Today')}</span>${esc(p.poste)} · ${esc(p.entreprise)}</span></span></a></li>`).join('') + '</ul></section>';
+      }
+      const fams = METIERS.filter(m => JOBS.some(j => j.metier === m.key));
+      h += `<section class="jobs" aria-labelledby="jobs-h"><div class="row-between"><h2 class="h2" id="jobs-h">${tr('Les offres du moment', 'Current offers')}</h2><p class="mono small" id="result-label" data-one="${tr('offre', 'offer')}" data-many="${tr('offres', 'offers')}" aria-live="polite">${plural(JOBS.length, tr('offre', 'offer'), tr('offres', 'offers'))}</p></div>` +
+        `<p class="note">${tr("Sélectionnées à la main par NextGen sur les sites d'emploi. La candidature se fait sur l'annonce d'origine.", 'Hand-picked by NextGen from job boards. Offers are in France; you apply on the original listing.')}</p>`;
+      if (!JOBS.length) h += `<p class="empty">${tr('Pas d\'offre sélectionnée pour le moment : la prochaine sélection arrive bientôt.', 'No offers selected right now: the next selection is coming soon.')}</p>`;
+      else {
+        if (fams.length > 1) h += `<div class="filters js-only" role="group" aria-label="${tr('Filtrer par métier', 'Filter by job family')}"><button type="button" class="filter on" data-filter="metier" data-value="" aria-pressed="true">${tr('Tous', 'All')}</button>${fams.map(m => `<button type="button" class="filter" data-filter="metier" data-value="${m.key}" aria-pressed="false">${esc(m.nom)} <small>${JOBS.filter(j => j.metier === m.key).length}</small></button>`).join('')}</div>`;
+        h += '<div data-list>' + fams.map(m => {
+          const js = JOBS.filter(j => j.metier === m.key), t = ALL.find(p => p.metier === m.key);
+          return `<section class="job-fam" data-group aria-labelledby="jf-${m.key}"><div class="job-fam-h"><h3 class="promo-h" id="jf-${m.key}">${esc(m.nom)} <span>${js.length}</span></h3>` +
+            (t ? `<a class="link-arrow" href="${L(t.path)}">${ENG ? `Like ${esc(t.nom)}, ${esc(t.poste)} at ${esc(t.entreprise)} →` : `Comme ${esc(t.nom)}, ${esc(t.poste)} chez ${esc(t.entreprise)} →`}</a>` : '') + '</div><ul class="job-list">' +
+            js.map(j => `<li class="job" data-item data-metier="${m.key}" data-search=""><div class="job-main"><p class="job-meta mono">${esc(CONTRATS[j.contrat] || j.contrat)}${j.ville ? ' · ' + esc(j.ville) : ''}</p><h4 class="job-t">${esc(j.titre)}</h4><p class="job-co">${logo(j.entreprise, 24, true)}<strong>${esc(j.entreprise)}</strong></p>` +
+              (j.pourquoi ? `<p class="job-why"><span>${tr('Pourquoi on l\'a retenue', 'Why we picked it')}</span>${esc(j.pourquoi)}</p>` : '') +
+              (j.outils.length ? `<p class="job-tools">${j.outils.map(toolLink).join('')}</p>` : '') +
+              `</div><a class="btn white job-go" href="${esc(j.lien)}" target="_blank" rel="noopener nofollow" data-umami-event="job-click" data-umami-event-entreprise="${esc(j.entreprise)}" data-umami-event-metier="${m.key}">${tr("Voir l'offre", 'View offer')} ↗</a></li>`).join('') + '</ul></section>';
+        }).join('') + '</div><p class="empty hidden" id="empty" data-tpl="' + tr('Aucune offre pour ce métier en ce moment.', 'No offer for this job family right now.') + '"></p>';
+      }
+      h += '</section>';
+      if (EMAIL) h += `<section class="sec"><div class="sec-l"><p class="eyebrow pinkd">${tr('Recruteurs', 'Recruiters')}</p><h2 class="sec-h">${tr('Vous recrutez un junior en CRO ou e-commerce ?', 'Hiring a junior in CRO or e-commerce?')}</h2></div><div class="sec-b"><p>${tr("Envoyez votre offre : si elle correspond à l'esprit de la sélection, elle rejoint la page. Une offre déjà pourvue ? Dites-le aussi, on la retire.", 'Send us your offer: if it fits the spirit of the selection, it joins the page. Offer already filled? Let us know and we\'ll take it down.')}</p>` +
+        `<p><a class="btn" href="mailto:${esc(EMAIL)}?subject=${encodeURIComponent(tr('Offre junior pour NextGen', 'Junior offer for NextGen'))}" data-umami-event="job-submit">${tr('Proposer une offre →', 'Submit an offer →')}</a></p></div></section>`;
+      return h;
+    }
+  });
+
   /* ---------- PROPOSER UN TALENT ---------- */
   if (EMAIL) page({
     path: 'proposer-un-talent/', nav: 'proposer', priority: '0.5', crumbs: [[tr('Proposer un talent', 'Suggest a talent'), 'proposer-un-talent/']],
@@ -736,7 +801,7 @@ function buildSite(SITE, RAW, opts) {
     (BILINGUE ? (ENG ? `French original: ${abs('llms.txt')}\n\n` : `English version: ${abs('en/llms.txt')}\n\n`) : '') +
     tr('Chaque profil (« Talent ») documente une personne : rôle, entreprise, expertises, parcours, déclic CRO, mentors, toolbox (outil + usage réel), conseil, hot take et mot de la fin (« Le CRO sans … ce n\'est pas du CRO »). Les citations sont attribuées et les synthèses rédigées par NextGen sont signalées. Toutes les pages sont en HTML statique.\n\n', 'Each profile (“Talent”) documents one person: role, company, expertise, career path, how they got into CRO, mentors, toolbox (tool + actual use), advice, hot take and final word (“CRO without … isn\'t CRO”). Quotes are attributed and summaries written by NextGen are flagged. All pages are static HTML.\n\n') +
     '## Talents\n\n' + ALL.map(p => `- [${p.nom} — ${p.poste}, ${p.entreprise}](${U(p.path)})${p.date ? ' (' + p.date + ')' : ''}${p.expertises.length ? ' · ' + p.expertises.join(', ') : ''}${p.citation ? tr(' : « ', ': “') + p.citation + CQ : ''}${p.exemple ? tr(' [profil d\'exemple]', ' [sample profile]') : ''}`).join('\n') + '\n\n' +
-    tr('## Pages principales\n\n', '## Main pages\n\n') + [[tr('Accueil', 'Home'), ''], [tr('Meet the Next Gen (tous les Talents)', 'Meet the Next Gen (all Talents)'), 'talents/'], [tr('Inspirations : experts, outils et ressources cités', 'Inspirations: experts, tools and resources cited'), 'inspirations/'], [tr('Mur des mots', 'Word wall'), 'mur-de-mots/'], [tr('À propos', 'About'), 'a-propos/']].concat(COMMU ? [[tr('Communauté', 'Community'), 'communaute/']] : [], EMAIL ? [[tr('Proposer un talent', 'Suggest a talent'), 'proposer-un-talent/']] : []).concat(INSIGHTS.length ? [['Insights', 'insights/']] : []).map(x => `- [${x[0]}](${U(x[1])})`).join('\n') + '\n\n' +
+    tr('## Pages principales\n\n', '## Main pages\n\n') + [[tr('Accueil', 'Home'), ''], [tr('Meet the Next Gen (tous les Talents)', 'Meet the Next Gen (all Talents)'), 'talents/'], [tr('Inspirations : experts, outils et ressources cités', 'Inspirations: experts, tools and resources cited'), 'inspirations/'], [tr('Mur des mots', 'Word wall'), 'mur-de-mots/'], [tr('À propos', 'About'), 'a-propos/']].concat(JOBS_RAW ? [[tr('Premier job : premiers pas des talents et offres juniors sélectionnées', 'First job: how the talents started and hand-picked junior offers'), 'premier-job/']] : [], COMMU ? [[tr('Communauté', 'Community'), 'communaute/']] : [], EMAIL ? [[tr('Proposer un talent', 'Suggest a talent'), 'proposer-un-talent/']] : []).concat(INSIGHTS.length ? [['Insights', 'insights/']] : []).map(x => `- [${x[0]}](${U(x[1])})`).join('\n') + '\n\n' +
     (TOOLS.length ? tr('## Outils les plus cités\n\n', '## Most cited tools\n\n') + TOOLS.slice(0, 10).map(t => `- ${t.page ? `[${t.name}](${U(t.path)})` : t.name}${tr(' : ', ': ')}${synth(t)}`).join('\n') + '\n' : '') +
     (MENTORS.length ? tr('\n## People to Follow (cités par les talents)\n\n', '\n## People to Follow (cited by the talents)\n\n') + MENTORS.map(m => `- ${m.nom}${m.expertise ? ' (' + m.expertise + ')' : ''}${tr(' : ', ': ')}${m.by.map(x => REL[x.relation].by.toLowerCase() + ' ' + x.p.nom).join(', ')}`).join('\n') + '\n' : '') +
     (RESS.length ? '\n## Read · Watch · Listen\n\n' + RESS.map(r => `- ${r.titre} [${TYPES[r.type]}]${r.auteur ? ', ' + r.auteur : ''}${tr(' : ', ': ')}${r.by.map(x => REL[x.relation].by.toLowerCase() + ' ' + x.p.nom).join(', ')}`).join('\n') + '\n' : '') +
@@ -762,7 +827,7 @@ if (typeof require !== 'undefined' && typeof module !== 'undefined' && require.m
   };
   const SITE = load('data/site.js', 'SITE'), INTERVIEWS = load('data/interviews.js', 'INTERVIEWS'), EN = load('data/en.js', 'EN', true);
   const ver = require('crypto').createHash('md5').update(['assets/css/style.css', 'assets/js/app.js'].map(f => fs.existsSync(path.join(ROOT, f)) ? fs.readFileSync(path.join(ROOT, f)) : '').join('')).digest('hex').slice(0, 8);
-  const common = { ver, insights: load('data/insights.js', 'INSIGHTS', true), local: args.indexOf('--local') >= 0, exists: p => fs.existsSync(path.join(ROOT, p)) };
+  const common = { ver, jobs: load('data/jobs.js', 'JOBS', true), insights: load('data/insights.js', 'INSIGHTS', true), local: args.indexOf('--local') >= 0, exists: p => fs.existsSync(path.join(ROOT, p)) };
   const res = buildSite(SITE, INTERVIEWS, Object.assign({}, common, { lang: 'fr', bilingue: !!EN }));
   if (EN) {
     // Version anglaise : seuls les avertissements propres à la traduction sont affichés (les autres l'ont déjà été en français)

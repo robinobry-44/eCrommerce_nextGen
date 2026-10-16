@@ -53,7 +53,7 @@ function buildSite(SITE, RAW, opts) {
     });
   }
   // URL d'une page dans une langue : FR = chemin d'origine, EN = /en/ + premier segment traduit
-  const SEG = { 'mur-de-mots': 'word-wall', 'a-propos': 'about', 'communaute': 'community', 'outils': 'tools' };
+  const SEG = { 'mur-de-mots': 'word-wall', 'a-propos': 'about', 'communaute': 'community', 'outils': 'tools', 'proposer-un-talent': 'suggest-a-talent' };
   const loc = (lg, p) => { p = p || ''; if (lg !== 'en') return p; const m = /^([^/#]*)(.*)$/.exec(p); return 'en/' + (m[1] ? (SEG[m[1]] || m[1]) : '') + m[2]; };
 
   const BASE = String(SITE.url || '').replace(/\/+$/, '');
@@ -61,7 +61,10 @@ function buildSite(SITE, RAW, opts) {
   const BRAND = SITE.nomCourt || 'eCROmmerce NextGen';
   const AUTHOR = (SITE.apropos && SITE.apropos.auteur) || {};
   const LINKS = SITE.liens || {};
-  const PROPOSER = LINKS.proposerTalent || LINKS.linkedin || '';
+  const COMMU = SITE.communaute !== false; // false = tout ce qui concerne la communauté WhatsApp est masqué
+  const EMAIL = SITE.email || '';
+  const PROPOSER = EMAIL ? '' : (LINKS.proposerTalent || LINKS.linkedin || ''); // lien externe, seulement s'il n'y a pas de page « Proposer un talent »
+  const VER = opts.ver ? '?v=' + opts.ver : ''; // version des CSS/JS : force le navigateur à recharger après une mise à jour
 
   /* ---------- utilitaires ---------- */
   const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -327,7 +330,7 @@ function buildSite(SITE, RAW, opts) {
 
   /* ---------- gabarit ---------- */
   const NAV = [['people', 'talents/', 'Talents'], ['inspirations', 'inspirations/', 'Inspirations']].concat(INSIGHTS.length ? [['insights', 'insights/', 'Insights']] : [], [['apropos', 'a-propos/', tr('À propos', 'About')]]);
-  const FOOTLINKS = [['talents/', 'Talents'], ['inspirations/', 'Inspirations'], ['mur-de-mots/', tr('Mur des mots', 'Word wall')], ['a-propos/', tr('À propos', 'About')], ['communaute/', tr('Communauté', 'Community')]];
+  const FOOTLINKS = [['talents/', 'Talents'], ['inspirations/', 'Inspirations'], ['mur-de-mots/', tr('Mur des mots', 'Word wall')], ['a-propos/', tr('À propos', 'About')]].concat(COMMU ? [['communaute/', tr('Communauté', 'Community')]] : [], EMAIL ? [['proposer-un-talent/', tr('Proposer un talent', 'Suggest a talent')]] : []);
   const NL = SITE.newsletter || {};
   const nlBlock = () => !has(NL.action) ? '' : `<section class="nl" aria-labelledby="nl-h"><div class="nl-txt"><p class="eyebrow">${esc(NL.surtitre || 'Newsletter')}</p><h2 class="nl-h" id="nl-h">${esc(NL.titre || tr('Ne ratez aucun Talent', 'Never miss a Talent'))}</h2>${NL.texte ? `<p>${esc(NL.texte)}</p>` : ''}</div>` +
     `<form class="nl-form" action="${esc(NL.action)}" method="post" target="_blank"><label class="vh" for="bd-email">${tr('Votre adresse email', 'Your email address')}</label><div class="nl-field"><input type="email" name="email" id="bd-email" placeholder="${tr('votre@email.com', 'you@email.com')}" autocomplete="email" required><button type="submit" class="btn" data-umami-event="newsletter-subscribe">${esc(NL.bouton || tr("Je m'abonne", 'Subscribe'))}</button></div>` +
@@ -363,20 +366,23 @@ function buildSite(SITE, RAW, opts) {
       (o.preload ? `<link rel="preload" as="image" href="${esc(L.a(o.preload))}" fetchpriority="high">\n` : '') +
       '<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n' +
       '<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Nunito:wght@800;900&amp;display=swap" rel="stylesheet">\n' +
-      `<link rel="stylesheet" href="${L.a('assets/css/style.css')}">\n<script>document.documentElement.classList.add('js')</script>\n` +
+      `<link rel="stylesheet" href="${L.a('assets/css/style.css')}${VER}">\n<script>document.documentElement.classList.add('js')</script>\n` +
       (graph.length ? `<script type="application/ld+json">${json({ '@context': 'https://schema.org', '@graph': graph })}</script>\n` : '') +
       '</head>\n<body>\n<a class="skip" href="#main">' + tr('Aller au contenu', 'Skip to content') + '</a>\n<div class="wrap">\n' +
       `<header class="hdr"><div class="hdr-in"><a class="brand" href="${L('')}"><span class="brand-logo"><img src="${L.a('images/mascotte.png')}" alt="" width="46" height="46"></span><span class="brand-name">${esc(NAME)}</span></a>` +
-      `<nav class="nav" aria-label="${tr('Navigation principale', 'Main navigation')}">${NAV.map(n => `<a href="${L(n[1])}"${o.nav === n[0] ? ' class="on" aria-current="page"' : ''}>${esc(n[2])}</a>`).join('')}<a class="nav-cta" href="${L('communaute/')}" data-umami-event="cta-communaute" data-umami-event-position="header"${o.nav === 'communaute' ? ' aria-current="page"' : ''}>${tr('Rejoindre la communauté', 'Join the community')}</a>${BILINGUE ? `<a class="lang" href="${L.alt(other, o.noindex ? '' : o.path)}" hreflang="${other}" lang="${other}" data-umami-event="switch-lang" data-umami-event-to="${other}" title="${tr('English version', 'Version française')}"><span class="flag" aria-hidden="true">${FLAGS[other]}</span>${other.toUpperCase()}</a>` : ''}</nav></div></header>\n` +
+      `<nav class="nav" aria-label="${tr('Navigation principale', 'Main navigation')}">${NAV.map(n => `<a href="${L(n[1])}"${o.nav === n[0] ? ' class="on" aria-current="page"' : ''}>${esc(n[2])}</a>`).join('')}${COMMU ? `<a class="nav-cta" href="${L('communaute/')}" data-umami-event="cta-communaute" data-umami-event-position="header"${o.nav === 'communaute' ? ' aria-current="page"' : ''}>${tr('Rejoindre la communauté', 'Join the community')}</a>` : EMAIL ? `<a class="nav-cta" href="${L('proposer-un-talent/')}" data-umami-event="cta-proposer" data-umami-event-position="header"${o.nav === 'proposer' ? ' aria-current="page"' : ''}>${tr('Proposer un talent', 'Suggest a talent')}</a>` : ''}${BILINGUE ? `<a class="lang" href="${L.alt(other, o.noindex ? '' : o.path)}" hreflang="${other}" lang="${other}" data-umami-event="switch-lang" data-umami-event-to="${other}" title="${tr('English version', 'Version française')}"><span class="flag" aria-hidden="true">${FLAGS[other]}</span>${other.toUpperCase()}</a>` : ''}</nav></div></header>\n` +
       `<main id="main">\n${main}\n${o.noindex ? '' : nlBlock()}</main>\n` +
       `<footer class="ftr"><div class="ftr-in"><nav class="ftr-nav" aria-label="${tr('Pied de page', 'Footer')}">${FOOTLINKS.map(l => `<a href="${L(l[0])}">${esc(l[1])}</a>`).join('')}</nav><div class="ftr-meta"><span>${esc(f.gauche || '')}</span><span>${esc(f.droite || '')}</span></div></div></footer>\n</div>\n` +
-      (o.script ? `<script src="${L.a('assets/js/app.js')}" defer></script>\n` : '') + '</body>\n</html>\n';
+      (o.script ? `<script src="${L.a('assets/js/app.js')}${VER}" defer></script>\n` : '') + '</body>\n</html>\n';
     FILES[o.file ? (ENG ? 'en/' : '') + o.file : FPATH + 'index.html'] = html;
     if (!o.noindex) SITEMAP.push({ loc: url, alt: ALT ? { fr: ALT.fr, en: ALT.en } : undefined, lastmod: o.lastmod || LAST, priority: o.priority || '0.6' });
   }
-  const joinBlock = (L, title) => `<section class="join" aria-labelledby="join-h"><div class="join-txt"><p class="eyebrow">${tr('Communauté', 'Community')}</p><h2 class="join-h" id="join-h">${title || 'Join the Next Gen'}</h2>` +
+  const proposeBtn = (L, cls) => EMAIL ? `<a class="btn ${cls}" href="${L('proposer-un-talent/')}" data-umami-event="proposer-talent">${tr('Proposer un talent →', 'Suggest a talent →')}</a>` : PROPOSER ? `<a class="btn ${cls}" href="${esc(PROPOSER)}" target="_blank" rel="noopener" data-umami-event="proposer-talent">${tr('Proposer un talent →', 'Suggest a talent →')}</a>` : '';
+  const joinBlock = (L, title) => !COMMU ? `<section class="join" aria-labelledby="join-h"><div class="join-txt"><p class="eyebrow">${tr('Proposer un talent', 'Suggest a talent')}</p><h2 class="join-h" id="join-h">${title || tr('Qui sera la prochaine Next Gen ?', 'Who will be the next Next Gen?')}</h2>` +
+    `<p>${tr("Vous connaissez une future pépite du CRO ou de l'e-commerce ? Envoyez son profil LinkedIn : la prochaine Next Gen est peut-être déjà dans votre réseau.", 'Know a rising star in CRO or e-commerce? Send us their LinkedIn profile: the next Next Gen may already be in your network.')}</p>` +
+    `<div class="ctas">${proposeBtn(L, 'dark')}</div></div>${mascot(L, 260)}</section>` : `<section class="join" aria-labelledby="join-h"><div class="join-txt"><p class="eyebrow">${tr('Communauté', 'Community')}</p><h2 class="join-h" id="join-h">${title || 'Join the Next Gen'}</h2>` +
     `<p>${tr("Vous connaissez une future pépite du CRO ou de l'e-commerce ? Proposez-la. Vous voulez échanger avec les Talents et les passionnés de CRO ? Rejoignez la communauté.", 'Know a rising star in CRO or e-commerce? Suggest them. Want to connect with the Talents and fellow CRO enthusiasts? Join the community.')}</p>` +
-    `<div class="ctas">${PROPOSER ? `<a class="btn dark" href="${esc(PROPOSER)}" target="_blank" rel="noopener" data-umami-event="proposer-talent">${tr('Proposer un talent →', 'Suggest a talent →')}</a>` : ''}<a class="btn white" href="${L('communaute/')}">${tr('Rejoindre la communauté', 'Join the community')}</a></div></div>${mascot(L, 260)}</section>`;
+    `<div class="ctas">${proposeBtn(L, 'dark')}<a class="btn white" href="${L('communaute/')}">${tr('Rejoindre la communauté', 'Join the community')}</a></div></div>${mascot(L, 260)}</section>`;
 
   /* ---------- ACCUEIL ---------- */
   page({
@@ -615,7 +621,7 @@ function buildSite(SITE, RAW, opts) {
   /* ---------- MUR DE MOTS ---------- */
   const groups = ALL.filter(p => p.motsCles.length);
   page({
-    path: 'mur-de-mots/', nav: 'communaute', crumbs: [[tr('Communauté', 'Community'), 'communaute/'], [tr('Mur des mots', 'Word wall'), 'mur-de-mots/']],
+    path: 'mur-de-mots/', nav: 'communaute', crumbs: (COMMU ? [[tr('Communauté', 'Community'), 'communaute/']] : []).concat([[tr('Mur des mots', 'Word wall'), 'mur-de-mots/']]),
     title: tr('« Le CRO sans … ce n\'est pas du CRO » : le mur des mots — ', '“CRO without … isn\'t CRO”: the word wall — ') + BRAND,
     desc: clamp(tr('Le mot sans lequel le CRO n\'existe pas, selon ', 'The word CRO cannot exist without, according to ') + groups.length + tr(' talents : ', ' talents: ') + groups.slice(0, 6).map(p => p.motFin + ' (' + p.nom + ')').join(', ') + '…'),
     main: L => {
@@ -628,8 +634,8 @@ function buildSite(SITE, RAW, opts) {
     }
   });
 
-  /* ---------- COMMUNAUTÉ ---------- */
-  page({
+  /* ---------- COMMUNAUTÉ (masquée si SITE.communaute = false) ---------- */
+  if (COMMU) page({
     path: 'communaute/', nav: 'communaute', crumbs: [[tr('Communauté', 'Community'), 'communaute/']],
     title: tr('Communauté WhatsApp CRO & e-commerce — ', 'CRO & e-commerce WhatsApp community — ') + BRAND,
     desc: ENG ? 'Join the ' + BRAND + ' community: peer discussions, jobs and internships, CRO news and tools. And suggest the next talent to interview.' : 'Rejoignez la communauté ' + BRAND + ' : échanges entre pairs, jobs et stages, veille et outils CRO. Et proposez le prochain talent à interviewer.',
@@ -641,6 +647,27 @@ function buildSite(SITE, RAW, opts) {
         `<div class="wa-art" aria-hidden="true"><span class="wa-bubble">${tr("Miam, on t'attend !", "Yum, we're waiting for you!")}</span><div class="wa-frame"><div class="box"><img src="${L.a('images/mascotte.png')}" alt="" width="349" height="246"></div><img src="${WA}" alt="" width="120" height="120"></div></div></section>` +
         `<section class="sec"><div class="sec-l"><p class="eyebrow pinkd">${tr('Proposer un talent', 'Suggest a talent')}</p><h2 class="sec-h">${tr('Qui sera la prochaine Next Gen ?', 'Who will be the next Next Gen?')}</h2></div><div class="sec-b"><p>${ENG ? `Mention them in a comment on LinkedIn so ${esc(first(AUTHOR.nom))} can reach out. The next Next Gen may already be in your network.` : `Mentionnez-la en commentaire sur LinkedIn pour que ${esc(first(AUTHOR.nom))} aille à sa rencontre. La prochaine Next Gen est peut-être déjà dans votre réseau.`}</p>${PROPOSER ? `<p><a class="btn" href="${esc(PROPOSER)}" target="_blank" rel="noopener" data-umami-event="proposer-talent">${tr('Proposer un talent →', 'Suggest a talent →')}</a></p>` : ''}</div></section>` +
         `<section class="sec"><div class="sec-l"><p class="eyebrow pinkd">${tr('Le mur des mots', 'The word wall')}</p><h2 class="sec-h">${tr("Le CRO sans […], ce n'est pas du CRO.", "CRO without […] isn't CRO.")}</h2></div><div class="sec-b"><p>${tr('Chaque interview se termine par un mot. Réunis, ils dessinent ce que la nouvelle génération met au cœur du métier : ', 'Every interview ends with one word. Together, they sketch what the new generation puts at the heart of the job: ')}${groups.slice(0, 6).map(p => `<a href="${L(p.path)}">${esc(p.motFin.toLowerCase())}</a>`).join(', ')}…</p><p><a class="link-arrow" href="${L('mur-de-mots/')}">${tr('Voir le mur des mots →', 'See the word wall →')}</a></p></div></section>`;
+    }
+  });
+
+  /* ---------- PROPOSER UN TALENT ---------- */
+  if (EMAIL) page({
+    path: 'proposer-un-talent/', nav: 'proposer', priority: '0.5', crumbs: [[tr('Proposer un talent', 'Suggest a talent'), 'proposer-un-talent/']],
+    title: tr('Proposer un talent CRO ou e-commerce — ', 'Suggest a CRO or e-commerce talent — ') + BRAND,
+    desc: tr('Vous connaissez une future pépite du CRO ou de l\'e-commerce ? Envoyez son profil LinkedIn pour qu\'elle soit interviewée sur ', 'Know a rising star in CRO or e-commerce? Send their LinkedIn profile so they can be interviewed on ') + BRAND + '.',
+    main: L => {
+      const subj = tr('Proposition de talent NextGen', 'NextGen talent suggestion');
+      return `<section class="page-head"><p class="eyebrow pinkd">${tr('Proposer un talent', 'Suggest a talent')}</p><h1 class="h1">${tr('Qui sera la prochaine Next Gen ?', 'Who will be the next Next Gen?')}</h1>` +
+        `<p class="lead">${ENG ? `Know a rising star in CRO or e-commerce? Send their LinkedIn profile to ${esc(first(AUTHOR.nom))}, who will reach out to them.` : `Vous connaissez une future pépite du CRO ou de l'e-commerce ? Envoyez son profil LinkedIn à ${esc(first(AUTHOR.nom))}, qui ira à sa rencontre.`}</p></section>` +
+        `<form class="suggest" action="mailto:${esc(EMAIL)}?subject=${encodeURIComponent(subj)}" method="post" enctype="text/plain" data-to="${esc(EMAIL)}" data-subject="${esc(subj)}">` +
+        `<label for="s-li">${tr('Profil LinkedIn du talent', "The talent's LinkedIn profile")} <span class="req">*</span></label><input id="s-li" name="linkedin" type="url" required inputmode="url" placeholder="https://www.linkedin.com/in/…" pattern="https?://([a-zA-Z]+\\.)?linkedin\\.com/.+" title="${tr('Une adresse de profil LinkedIn, par ex. https://www.linkedin.com/in/prenom-nom/', 'A LinkedIn profile URL, e.g. https://www.linkedin.com/in/first-last/')}">` +
+        `<label for="s-why">${tr('Pourquoi cette personne ?', 'Why this person?')} <span class="opt">${tr('facultatif', 'optional')}</span></label><textarea id="s-why" name="pourquoi" rows="4"></textarea>` +
+        `<label for="s-name">${tr('Votre nom', 'Your name')} <span class="opt">${tr('facultatif', 'optional')}</span></label><input id="s-name" name="nom" type="text" autocomplete="name">` +
+        `<button class="btn" type="submit" data-umami-event="proposer-talent-envoi">${tr('Envoyer la proposition →', 'Send the suggestion →')}</button>` +
+        `<p class="note">${tr('Le bouton ouvre votre messagerie avec le message prérempli : il ne reste qu\'à l\'envoyer. Vous pouvez aussi écrire directement à', 'The button opens your email app with the message ready: just hit send. You can also write directly to')} <a href="mailto:${esc(EMAIL)}">${esc(EMAIL)}</a>.</p></form>` +
+        `<script>(function(){var f=document.currentScript.previousElementSibling;f.addEventListener('submit',function(e){e.preventDefault();var g=function(n){return (f.elements[n].value||'').trim();};` +
+        `var b=${JSON.stringify(tr('Profil LinkedIn : ', 'LinkedIn profile: '))}+g('linkedin')+(g('pourquoi')?'\\n\\n'+${JSON.stringify(tr('Pourquoi : ', 'Why: '))}+g('pourquoi'):'')+(g('nom')?'\\n\\n'+${JSON.stringify(tr('Proposé par : ', 'Suggested by: '))}+g('nom'):'');` +
+        `location.href='mailto:'+f.getAttribute('data-to')+'?subject='+encodeURIComponent(f.getAttribute('data-subject'))+'&body='+encodeURIComponent(b);});})();</script>`;
     }
   });
 
@@ -700,7 +727,7 @@ function buildSite(SITE, RAW, opts) {
   const idx = LOCAL ? 'index.html' : '';
   if (!ENG) {
   FILES['interview.html'] = `<!DOCTYPE html>\n<html lang="fr">\n<head>\n<meta charset="utf-8">\n<meta name="robots" content="noindex">\n<title>Redirection… — ${esc(BRAND)}</title>\n<script>var id=new URLSearchParams(location.search).get("id");location.replace(id?"talents/"+encodeURIComponent(id)+"/${idx}":"talents/${idx}");</script>\n</head>\n<body>\n<p><a href="talents/${idx}">Voir tous les Talents</a></p>\n</body>\n</html>\n`;
-  FILES['_redirects'] = ['/people /talents/ 301', '/people/ /talents/ 301', '/people/* /talents/:splat 301', '/interviews /talents/ 301', '/interviews/ /talents/ 301', '/interviews/* /talents/:splat 301', '/profils/ /talents/ 301', '/profils /talents/ 301', '/mentors/ /inspirations/ 301', '/mentors /inspirations/ 301', '/outils /inspirations/ 301', '/outils/ /inspirations/ 301', '/marques-outils/ /inspirations/ 301', '/marques-outils /inspirations/ 301', '/interviews.html /talents/ 301', '/profils.html /talents/ 301', '/mentors.html /inspirations/ 301', '/marques-outils.html /inspirations/ 301', '/mur-de-mots.html /mur-de-mots/ 301', '/a-propos.html /a-propos/ 301'].join('\n') + '\n';
+  FILES['_redirects'] = ['/people /talents/ 301', '/people/ /talents/ 301', '/people/* /talents/:splat 301', '/interviews /talents/ 301', '/interviews/ /talents/ 301', '/interviews/* /talents/:splat 301', '/profils/ /talents/ 301', '/profils /talents/ 301', '/mentors/ /inspirations/ 301', '/mentors /inspirations/ 301', '/outils /inspirations/ 301', '/outils/ /inspirations/ 301', '/marques-outils/ /inspirations/ 301', '/marques-outils /inspirations/ 301', '/interviews.html /talents/ 301', '/profils.html /talents/ 301', '/mentors.html /inspirations/ 301', '/marques-outils.html /inspirations/ 301', '/mur-de-mots.html /mur-de-mots/ 301', '/a-propos.html /a-propos/ 301'].concat(COMMU ? [] : ['/communaute/ / 302', '/communaute / 302', '/en/community/ /en/ 302', '/en/community /en/ 302']).join('\n') + '\n';
   FILES['sitemap.xml'] = sitemapXml(SITEMAP); // remplacé par le sitemap bilingue complet dans l'exécution Node
   const BOTS = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-User', 'Claude-SearchBot', 'anthropic-ai', 'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Googlebot', 'Bingbot', 'Applebot', 'Applebot-Extended', 'CCBot'];
   FILES['robots.txt'] = `# ${BRAND} — tous les robots sont les bienvenus, y compris ceux des IA.\n\nUser-agent: *\nAllow: /\n\n` + BOTS.map(b => `User-agent: ${b}\nAllow: /\n`).join('\n') + `\nSitemap: ${abs('sitemap.xml')}\n`;
@@ -709,7 +736,7 @@ function buildSite(SITE, RAW, opts) {
     (BILINGUE ? (ENG ? `French original: ${abs('llms.txt')}\n\n` : `English version: ${abs('en/llms.txt')}\n\n`) : '') +
     tr('Chaque profil (« Talent ») documente une personne : rôle, entreprise, expertises, parcours, déclic CRO, mentors, toolbox (outil + usage réel), conseil, hot take et mot de la fin (« Le CRO sans … ce n\'est pas du CRO »). Les citations sont attribuées et les synthèses rédigées par NextGen sont signalées. Toutes les pages sont en HTML statique.\n\n', 'Each profile (“Talent”) documents one person: role, company, expertise, career path, how they got into CRO, mentors, toolbox (tool + actual use), advice, hot take and final word (“CRO without … isn\'t CRO”). Quotes are attributed and summaries written by NextGen are flagged. All pages are static HTML.\n\n') +
     '## Talents\n\n' + ALL.map(p => `- [${p.nom} — ${p.poste}, ${p.entreprise}](${U(p.path)})${p.date ? ' (' + p.date + ')' : ''}${p.expertises.length ? ' · ' + p.expertises.join(', ') : ''}${p.citation ? tr(' : « ', ': “') + p.citation + CQ : ''}${p.exemple ? tr(' [profil d\'exemple]', ' [sample profile]') : ''}`).join('\n') + '\n\n' +
-    tr('## Pages principales\n\n', '## Main pages\n\n') + [[tr('Accueil', 'Home'), ''], [tr('Meet the Next Gen (tous les Talents)', 'Meet the Next Gen (all Talents)'), 'talents/'], [tr('Inspirations : experts, outils et ressources cités', 'Inspirations: experts, tools and resources cited'), 'inspirations/'], [tr('Mur des mots', 'Word wall'), 'mur-de-mots/'], [tr('À propos', 'About'), 'a-propos/'], [tr('Communauté', 'Community'), 'communaute/']].concat(INSIGHTS.length ? [['Insights', 'insights/']] : []).map(x => `- [${x[0]}](${U(x[1])})`).join('\n') + '\n\n' +
+    tr('## Pages principales\n\n', '## Main pages\n\n') + [[tr('Accueil', 'Home'), ''], [tr('Meet the Next Gen (tous les Talents)', 'Meet the Next Gen (all Talents)'), 'talents/'], [tr('Inspirations : experts, outils et ressources cités', 'Inspirations: experts, tools and resources cited'), 'inspirations/'], [tr('Mur des mots', 'Word wall'), 'mur-de-mots/'], [tr('À propos', 'About'), 'a-propos/']].concat(COMMU ? [[tr('Communauté', 'Community'), 'communaute/']] : [], EMAIL ? [[tr('Proposer un talent', 'Suggest a talent'), 'proposer-un-talent/']] : []).concat(INSIGHTS.length ? [['Insights', 'insights/']] : []).map(x => `- [${x[0]}](${U(x[1])})`).join('\n') + '\n\n' +
     (TOOLS.length ? tr('## Outils les plus cités\n\n', '## Most cited tools\n\n') + TOOLS.slice(0, 10).map(t => `- ${t.page ? `[${t.name}](${U(t.path)})` : t.name}${tr(' : ', ': ')}${synth(t)}`).join('\n') + '\n' : '') +
     (MENTORS.length ? tr('\n## People to Follow (cités par les talents)\n\n', '\n## People to Follow (cited by the talents)\n\n') + MENTORS.map(m => `- ${m.nom}${m.expertise ? ' (' + m.expertise + ')' : ''}${tr(' : ', ': ')}${m.by.map(x => REL[x.relation].by.toLowerCase() + ' ' + x.p.nom).join(', ')}`).join('\n') + '\n' : '') +
     (RESS.length ? '\n## Read · Watch · Listen\n\n' + RESS.map(r => `- ${r.titre} [${TYPES[r.type]}]${r.auteur ? ', ' + r.auteur : ''}${tr(' : ', ': ')}${r.by.map(x => REL[x.relation].by.toLowerCase() + ' ' + x.p.nom).join(', ')}`).join('\n') + '\n' : '') +
@@ -734,7 +761,8 @@ if (typeof require !== 'undefined' && typeof module !== 'undefined' && require.m
     return ctx.window[key];
   };
   const SITE = load('data/site.js', 'SITE'), INTERVIEWS = load('data/interviews.js', 'INTERVIEWS'), EN = load('data/en.js', 'EN', true);
-  const common = { insights: load('data/insights.js', 'INSIGHTS', true), local: args.indexOf('--local') >= 0, exists: p => fs.existsSync(path.join(ROOT, p)) };
+  const ver = require('crypto').createHash('md5').update(['assets/css/style.css', 'assets/js/app.js'].map(f => fs.existsSync(path.join(ROOT, f)) ? fs.readFileSync(path.join(ROOT, f)) : '').join('')).digest('hex').slice(0, 8);
+  const common = { ver, insights: load('data/insights.js', 'INSIGHTS', true), local: args.indexOf('--local') >= 0, exists: p => fs.existsSync(path.join(ROOT, p)) };
   const res = buildSite(SITE, INTERVIEWS, Object.assign({}, common, { lang: 'fr', bilingue: !!EN }));
   if (EN) {
     // Version anglaise : seuls les avertissements propres à la traduction sont affichés (les autres l'ont déjà été en français)

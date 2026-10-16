@@ -29,7 +29,7 @@ main{flex:1;width:100%;max-width:1320px;margin:0 auto;padding:0 var(--pad) 96px}
 .nav a{font-family:var(--mono);font-size:13px;font-weight:500;padding:9px 16px;border-radius:999px;text-decoration:none;color:var(--ink)}
 .nav a:hover{background:var(--soft);color:var(--ink)}
 .nav a.on{background:var(--ink);color:#fff}
-.nav a.nav-cta{background:var(--pink);color:#fff;font-weight:700;margin-left:6px}
+.nav a.nav-cta{background:var(--pink);color:#fff;font-weight:700;margin-left:6px;white-space:nowrap}
 .nav a.nav-cta:hover{background:var(--pink-d);color:#fff}
 .nav a.nav-cta[aria-current]{background:var(--ink)}
 .nav a.lang{margin-left:6px;padding:8px 13px 8px 10px;border:1.5px solid var(--ink);font-weight:700;letter-spacing:.04em;display:inline-flex;align-items:center;gap:8px}
@@ -463,3 +463,12 @@ main{flex:1;width:100%;max-width:1320px;margin:0 auto;padding:0 var(--pad) 96px}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
 }
+/* proposer un talent */
+.suggest{max-width:680px;display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.suggest label{font-weight:700;font-size:16px;margin-top:14px}
+.suggest label .req{color:var(--pink-d)}
+.suggest label .opt{font-family:var(--mono);font-weight:400;font-size:12px;color:var(--text2);margin-left:6px}
+.suggest input,.suggest textarea{font:inherit;font-size:17px;padding:14px 16px;border:1.5px solid var(--ink);border-radius:14px;background:#fff;color:var(--ink);width:100%}
+.suggest input:focus,.suggest textarea:focus{outline:3px solid var(--rosy);outline-offset:1px}
+.suggest .btn{align-self:flex-start;margin-top:18px;border:0;cursor:pointer}
+.suggest .note{margin-top:6px}

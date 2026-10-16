@@ -17,6 +17,11 @@ window.SITE = {
   // Adresse publique du site (sans / final) : canoniques, sitemap, aperçus LinkedIn, JSON-LD.
   url: "https://ecrommerce-nextgen.fr",
 
+  // Communauté WhatsApp : false = masquée partout (menu, page, boutons) tant qu'elle n'est pas lancée
+  communaute: false,
+  // Adresse qui reçoit les propositions de talents (page « Proposer un talent »)
+  email: "robin@ecrommerce-nextgen.fr",
+
   // Lien d'invitation du groupe WhatsApp
   whatsapp: "https://chat.whatsapp.com/",
   // Mesure d'audience Umami (sans cookies). Laisser "" pour désactiver.

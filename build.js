@@ -267,7 +267,7 @@ function buildSite(SITE, RAW, opts) {
     if (!METIERS.some(m => m.key === norm(j.metier))) warn('Offre « ' + j.titre + ' » : metier « ' + j.metier + ' » inconnu (cro, analytics, ux, ecommerce).');
     if (has(j.expire) && j.expire < today) return false; // offre expirée : retirée automatiquement
     return true;
-  }).map(j => ({ titre: j.titre, entreprise: j.entreprise || '', metier: norm(j.metier), contrat: norm(j.contrat), ville: j.ville || '', lien: j.lien, outils: list(j.outils).map(canon), pourquoi: ENG ? (j.pourquoiEn || j.pourquoi || '') : (j.pourquoi || '') })) : [];
+  }).map(j => ({ titre: j.titre, entreprise: j.entreprise || '', metier: norm(j.metier), contrat: norm(j.contrat), ville: j.ville || '', lien: j.lien, domaine: j.domaine || '', outils: list(j.outils).map(canon), pourquoi: ENG ? (j.pourquoiEn || j.pourquoi || '') : (j.pourquoi || '') })) : [];
   const JOBS_MAJ = JOBS_RAW && /^\d{4}-\d{2}-\d{2}$/.test(JOBS_RAW.majLe || '') ? JOBS_RAW.majLe : '';
   // Premier pas d'un talent : 1re expérience du parcours (+ type de contrat s'il est indiqué)
   const firstStep = p => {
@@ -681,6 +681,7 @@ function buildSite(SITE, RAW, opts) {
     desc: clamp(ENG ? `How the Next Gen got started, and a hand-picked selection of junior offers in CRO, web analytics, UX and e-commerce (${plural(JOBS.length, 'offer', 'offers')}, France).` : `Comment la Next Gen a démarré, et une sélection d'offres juniors en CRO, web analytics, UX et e-commerce : ${plural(JOBS.length, 'stage ou alternance', 'stages et alternances')} choisis à la main.`),
     ld: [{ '@type': 'CollectionPage', name: tr('Premier job CRO & e-commerce', 'First job in CRO & e-commerce'), url: U('premier-job/'), inLanguage: INLANG, isPartOf: { '@id': abs('#website') }, dateModified: JOBS_MAJ || undefined }],
     main: L => {
+      const jobLogo = j => { const d = j.domaine || LOGOS[norm(canon(j.entreprise))]; return `<span class="job-logo" aria-hidden="true"><span class="job-ini">${esc(initials(j.entreprise))}</span>${d ? `<img src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(d)}&amp;sz=256" alt="" width="64" height="64" loading="lazy" onerror="this.remove()">` : ''}</span>`; };
       const toolLink = n => { const t = toolOf(n); return t && t.page ? `<a class="chip" href="${L(t.path)}">${esc(n)}</a>` : `<span class="chip">${esc(n)}</span>`; };
       let h = `<section class="page-head"><p class="eyebrow pinkd">${tr('Premier job', 'First job')}${JOBS_MAJ ? ` · ${tr('sélection mise à jour le', 'selection updated on')} <time datetime="${JOBS_MAJ}">${esc(fmtDate(JOBS_MAJ))}</time>` : ''}</p>` +
         `<h1 class="h1">${tr('Ils ont commencé là.<br>À votre tour.', 'They started there.<br>Your turn.')}</h1>` +
@@ -702,10 +703,12 @@ function buildSite(SITE, RAW, opts) {
           const js = JOBS.filter(j => j.metier === m.key), t = ALL.find(p => p.metier === m.key);
           return `<section class="job-fam" data-group aria-labelledby="jf-${m.key}"><div class="job-fam-h"><h3 class="promo-h" id="jf-${m.key}">${esc(m.nom)} <span>${js.length}</span></h3>` +
             (t ? `<a class="link-arrow" href="${L(t.path)}">${ENG ? `Like ${esc(t.nom)}, ${esc(t.poste)} at ${esc(t.entreprise)} →` : `Comme ${esc(t.nom)}, ${esc(t.poste)} chez ${esc(t.entreprise)} →`}</a>` : '') + '</div><ul class="job-list">' +
-            js.map(j => `<li class="job" data-item data-metier="${m.key}" data-search=""><div class="job-main"><p class="job-meta mono">${esc(CONTRATS[j.contrat] || j.contrat)}${j.ville ? ' · ' + esc(j.ville) : ''}</p><h4 class="job-t">${esc(j.titre)}</h4><p class="job-co">${logo(j.entreprise, 24, true)}<strong>${esc(j.entreprise)}</strong></p>` +
+            js.map(j => `<li class="job c-${j.contrat}" data-item data-metier="${m.key}" data-search="">` +
+              `<div class="job-top"><p class="job-meta"><span class="job-badge">${esc(CONTRATS[j.contrat] || j.contrat)}</span>${j.ville ? `<span class="job-city">${esc(j.ville)}</span>` : ''}</p>` +
+              `<h4 class="job-t">${esc(j.titre)}</h4><p class="job-co">${esc(j.entreprise)}</p></div>${jobLogo(j)}` +
               (j.pourquoi ? `<p class="job-why"><span>${tr('Pourquoi on l\'a retenue', 'Why we picked it')}</span>${esc(j.pourquoi)}</p>` : '') +
-              (j.outils.length ? `<p class="job-tools">${j.outils.map(toolLink).join('')}</p>` : '') +
-              `</div><a class="btn white job-go" href="${esc(j.lien)}" target="_blank" rel="noopener nofollow" data-umami-event="job-click" data-umami-event-entreprise="${esc(j.entreprise)}" data-umami-event-metier="${m.key}">${tr("Voir l'offre", 'View offer')} ↗</a></li>`).join('') + '</ul></section>';
+              `<div class="job-foot">${j.outils.length ? `<p class="job-tools">${j.outils.map(toolLink).join('')}</p>` : '<span></span>'}` +
+              `<a class="btn job-go" href="${esc(j.lien)}" target="_blank" rel="noopener nofollow" data-umami-event="job-click" data-umami-event-entreprise="${esc(j.entreprise)}" data-umami-event-metier="${m.key}">${tr("Voir l'offre", 'View offer')} ↗</a></div></li>`).join('') + '</ul></section>';
         }).join('') + '</div><p class="empty hidden" id="empty" data-tpl="' + tr('Aucune offre pour ce métier en ce moment.', 'No offer for this job family right now.') + '"></p>';
       }
       h += '</section>';

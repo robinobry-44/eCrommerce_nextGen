@@ -32,6 +32,8 @@ main{flex:1;width:100%;max-width:1320px;margin:0 auto;padding:0 var(--pad) 96px}
 .nav a.nav-cta{background:var(--pink);color:#fff;font-weight:700;margin-left:6px}
 .nav a.nav-cta:hover{background:var(--pink-d);color:#fff}
 .nav a.nav-cta[aria-current]{background:var(--ink)}
+.nav a.lang{margin-left:6px;padding:8px 12px;border:1.5px solid var(--ink);font-weight:700;letter-spacing:.04em}
+.nav a.lang:hover{background:var(--ink);color:#fff}
 .ftr{border-top:1px solid var(--line)}
 .ftr-in{max-width:1320px;margin:0 auto;padding:28px var(--pad);display:flex;flex-direction:column;gap:16px}
 .ftr-nav{display:flex;gap:6px 20px;flex-wrap:wrap}

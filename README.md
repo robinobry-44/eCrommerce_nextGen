@@ -61,6 +61,16 @@ Avant la mise en production : `afficherExemples: false` dans `data/site.js` masq
 
 Attention aux virgules : chaque interview `{ … }` est suivie d'une virgule, et chaque texte est entre guillemets. Si un texte contient un guillemet `"`, écrivez `\"` ou utilisez « ».
 
+## Version anglaise (/en/)
+
+Le site est généré en français (racine) et en anglais (`/en/`, par ex. `/en/talents/salome-klein/`).
+Les traductions sont dans `data/en.js` : on n'y met que les **textes** (citation, intro, réponses, usages des outils…),
+tout le reste (photos, liens, dates) est repris de `data/interviews.js`.
+
+- **Nouveau Talent** : ajouter son bloc dans `data/en.js` (même slug). S'il manque, sa page anglaise s'affiche en français et le build le signale.
+- Le build ajoute automatiquement les balises `hreflang`, le sélecteur FR / EN, le sitemap bilingue et `/en/llms.txt`.
+- Sans `data/en.js`, le site redevient 100 % français, à l'identique.
+
 ## Modifier le lien WhatsApp, les liens ou les textes
 
 Dans `data/site.js` :

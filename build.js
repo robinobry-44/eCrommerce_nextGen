@@ -700,9 +700,9 @@ function buildSite(SITE, RAW, opts) {
       else {
         if (fams.length > 1) h += `<div class="filters js-only" role="group" aria-label="${tr('Filtrer par métier', 'Filter by job family')}"><button type="button" class="filter on" data-filter="metier" data-value="" aria-pressed="true">${tr('Tous', 'All')}</button>${fams.map(m => `<button type="button" class="filter" data-filter="metier" data-value="${m.key}" aria-pressed="false">${esc(m.nom)} <small>${JOBS.filter(j => j.metier === m.key).length}</small></button>`).join('')}</div>`;
         h += '<div data-list>' + fams.map(m => {
-          const js = JOBS.filter(j => j.metier === m.key), t = ALL.find(p => p.metier === m.key);
+          const js = JOBS.filter(j => j.metier === m.key);
           return `<section class="job-fam" data-group aria-labelledby="jf-${m.key}"><div class="job-fam-h"><h3 class="promo-h" id="jf-${m.key}">${esc(m.nom)} <span>${js.length}</span></h3>` +
-            (t ? `<a class="link-arrow" href="${L(t.path)}">${ENG ? `Like ${esc(t.nom)}, ${esc(t.poste)} at ${esc(t.entreprise)} →` : `Comme ${esc(t.nom)}, ${esc(t.poste)} chez ${esc(t.entreprise)} →`}</a>` : '') + '</div><ul class="job-list">' +
+            '</div><ul class="job-list">' +
             js.map(j => `<li class="job c-${j.contrat}" data-item data-metier="${m.key}" data-search="">` +
               `<div class="job-top"><p class="job-meta"><span class="job-badge">${esc(CONTRATS[j.contrat] || j.contrat)}</span>${j.ville ? `<span class="job-city">${esc(j.ville)}</span>` : ''}</p>` +
               `<h4 class="job-t">${esc(j.titre)}</h4><p class="job-co">${esc(j.entreprise)}</p></div>${jobLogo(j)}` +

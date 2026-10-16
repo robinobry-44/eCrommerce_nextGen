@@ -684,7 +684,7 @@ function buildSite(SITE, RAW, opts) {
       const toolLink = n => { const t = toolOf(n); return t && t.page ? `<a class="chip" href="${L(t.path)}">${esc(n)}</a>` : `<span class="chip">${esc(n)}</span>`; };
       let h = `<section class="page-head"><p class="eyebrow pinkd">${tr('Premier job', 'First job')}${JOBS_MAJ ? ` · ${tr('sélection mise à jour le', 'selection updated on')} <time datetime="${JOBS_MAJ}">${esc(fmtDate(JOBS_MAJ))}</time>` : ''}</p>` +
         `<h1 class="h1">${tr('Ils ont commencé là.<br>À votre tour.', 'They started there.<br>Your turn.')}</h1>` +
-        `<p class="lead">${tr("Chaque talent de la Next Gen a fait un premier pas : un stage, une alternance, un premier poste. Voici les leurs, et une sélection d'offres juniors pour faire le vôtre.", 'Every Next Gen talent took a first step: an internship, a work-study contract, a first job. Here are theirs, and a selection of junior offers to take yours.')}</p></section>`;
+        `<p class="lead wide">${tr("Chaque talent de la Next Gen a fait un premier pas : un stage, une alternance, un premier poste. Voici les leurs, et une sélection d'offres juniors pour faire le vôtre.", 'Every Next Gen talent took a first step: an internship, a work-study contract, a first job. Here are theirs, and a selection of junior offers to take yours.')}</p></section>`;
       const steps = ALL.map(p => ({ p, f: firstStep(p) })).filter(x => x.f);
       if (steps.length) {
         h += `<section class="fp" aria-labelledby="fp-h"><h2 class="eyebrow rule" id="fp-h">${tr('Leur premier pas', 'Their first step')}</h2><ul class="fp-grid">` +

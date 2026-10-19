@@ -20,7 +20,7 @@
    ========================================================================== */
 
 window.JOBS = {
-  majLe: "2026-10-16",
+  majLe: "2026-10-19",
   offres: [
     {
       titre: "Stage : Spécialiste CRO, CX & intelligence digitale",
@@ -91,6 +91,41 @@ window.JOBS = {
       lien: "https://fr.indeed.com/viewjob?jk=a00979e7db856836", vuLe: "2026-10-16", expire: "2026-11-30",
       pourquoi: "Les sciences cognitives appliquées aux interfaces : la psychologie derrière chaque friction, chaque clic, chaque hésitation.",
       pourquoiEn: "Cognitive science applied to interfaces: the psychology behind every friction, every click, every hesitation."
+    },
+    {
+      titre: "Alternance Web Performance, UX/UI, CRO & SEO",
+      entreprise: "ESCP Business School", domaine: "escp.eu", metier: "cro", contrat: "alternance", ville: "Paris (75)",
+      lien: "https://www.dreamworkhq.com/job/b0485ce0-c991-4fa6-bd4d-d6fe0e09dd55", vuLe: "2026-10-19", expire: "2026-11-30", outils: ["AB Tasty", "Figma", "Drupal"],
+      pourquoi: "Une alternance où l'on conçoit, lance et analyse soi-même des tests A/B pour améliorer parcours et conversion du site.",
+      pourquoiEn: "A work-study role where you design, launch and analyse A/B tests yourself to improve the site's journeys and conversion."
+    },
+    {
+      titre: "[Alternance] UX Researcher",
+      entreprise: "Solocal (PagesJaunes)", domaine: "solocal.com", metier: "ux", contrat: "alternance", ville: "Boulogne-Billancourt (92)",
+      lien: "https://fr.indeed.com/viewjob?jk=d8aac099eb394ef4", vuLe: "2026-10-19", expire: "2026-11-30",
+      pourquoi: "Une alternance entièrement dédiée à la recherche utilisateur, un intitulé encore rare à ce niveau.",
+      pourquoiEn: "A work-study role fully dedicated to user research, a title that is still rare at this level."
+    },
+    {
+      titre: "UX Content Designer Intern (UX copywriter)",
+      entreprise: "Back Market", domaine: "backmarket.fr", metier: "ux", contrat: "stage", ville: "Paris (75)",
+      lien: "https://www.welcometothejungle.com/fr/companies/back-market/jobs/ux-content-designer-intern-ux-copywriter_paris", vuLe: "2026-10-19", expire: "2026-11-30", outils: ["Figma"],
+      pourquoi: "Les mots du parcours d'achat, appuyés sur la recherche utilisateur et les données, chez une marketplace e-commerce présente en 18 langues.",
+      pourquoiEn: "The words of the shopping journey, backed by user research and data, at an e-commerce marketplace running in 18 languages."
+    },
+    {
+      titre: "Assistant·e E-commerce International – Stage janvier 2027",
+      entreprise: "Undiz", domaine: "undiz.com", metier: "ecommerce", contrat: "stage", ville: "Clichy (92)",
+      lien: "https://career.undiz.com/jobs/8373615-assistant-e-e-commerce-international-stage-janvier-2027", vuLe: "2026-10-19", expire: "2026-11-30", outils: ["Contentstack", "Commercetools", "Algolia"],
+      pourquoi: "Animation des sites internationaux, e-merchandising, suivi des KPI produits et pistes d'amélioration du parcours : le quotidien complet d'une équipe e-commerce.",
+      pourquoiEn: "Running international sites, e-merchandising, tracking product KPIs and spotting journey improvements: the full day-to-day of an e-commerce team."
+    },
+    {
+      titre: "Assistant·e Chef·fe de projets digitaux – Stage janvier 2027",
+      entreprise: "Maison 123", domaine: "maison123.com", metier: "ecommerce", contrat: "stage", ville: "Clichy (92)",
+      lien: "https://career.maison123.com/jobs/8509600-assistant-e-chef-fe-de-projets-digitaux-stage-janvier-2027", vuLe: "2026-10-19", expire: "2026-11-30", outils: ["Excel"],
+      pourquoi: "Côté projet e-commerce : refontes, nouvelles fonctionnalités, options de paiement et de livraison, avec l'analyse des KPI au programme.",
+      pourquoiEn: "On the e-commerce project side: redesigns, new features, payment and delivery options, with KPI analysis on the agenda."
     }
   ]
 };

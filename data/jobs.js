@@ -23,6 +23,13 @@ window.JOBS = {
   majLe: "2026-10-19",
   offres: [
     {
+      titre: "CRO Analyst Junior",
+      entreprise: "Tediber", domaine: "tediber.com", metier: "cro", contrat: "cdi", ville: "Paris (75)",
+      lien: "https://www.welcometothejungle.com/fr/companies/tediber/jobs/cro-analyst-junior_paris", vuLe: "2026-10-19", expire: "2026-11-30",
+      pourquoi: "Un vrai poste de CRO Analyst junior, intitulé compris, chez une marque née en ligne (literie en direct) : on y apprend le CRO là où il pèse directement sur le chiffre d'affaires.",
+      pourquoiEn: "A genuine junior CRO Analyst role, title included, at a digitally native brand (direct-to-consumer bedding): you learn CRO where it directly drives revenue."
+    },
+    {
       titre: "Stage : Spécialiste CRO, CX & intelligence digitale",
       entreprise: "Stellantis", domaine: "stellantis.com", metier: "cro", contrat: "stage", ville: "Poissy (78)",
       lien: "https://fr.indeed.com/viewjob?jk=63b0db83b8df825b", vuLe: "2026-10-16", expire: "2026-11-30",

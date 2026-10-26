@@ -84,7 +84,7 @@ window.JOBS = {
       titre: "Consultant Web Analytics – Stage de 6 mois ou alternance (janvier 2027)",
       entreprise: "Converteo", domaine: "converteo.com", metier: "analytics", contrat: "alternance", ville: "Paris (75)",
       lien: "https://jobs.converteo.com/jobs/7613255-consultant-web-analytics-h-f-stage-de-6-mois-ou-alternance-janvier-2027", vuLe: "2026-10-26", expire: "2026-12-07",
-      outils: ["Google Tag Manager", "Tealium", "Piano Analytics", "Amplitude", "Contentsquare", "BigQuery", "Looker Studio"],
+      outils: ["Google Tag Manager", "Tealium", "Piano Analytics", "Amplitude", "BigQuery", "Looker Studio"],
       pourquoi: "Ouvert en alternance comme en stage : du plan de taggage à la recette des données, on y apprend le tracking web et app de bout en bout, sur plusieurs clients.",
       pourquoiEn: "Open as a work-study contract or an internship: from tagging plan to data QA, you learn web and app tracking end to end, across several clients."
     },

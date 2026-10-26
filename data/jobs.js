@@ -20,7 +20,7 @@
    ========================================================================== */
 
 window.JOBS = {
-  majLe: "2026-10-16",
+  majLe: "2026-10-26",
   offres: [
     {
       titre: "CRO Analyst Junior",
@@ -44,6 +44,14 @@ window.JOBS = {
       pourquoiEn: "An internship that links acquisition and conversion: ideal to understand the whole funnel, from traffic to sale."
     },
     {
+      titre: "Stage Conversion Rate Optimization Specialist",
+      entreprise: "Kering", domaine: "kering.com", metier: "cro", contrat: "stage", ville: "Paris (75)",
+      lien: "https://www.glassdoor.fr/job-listing/kering-stage-conversion-rate-optimization-specialist-kering-JV_IC2881970_KO0,52_KE53,59.htm?jl=1010285961810", vuLe: "2026-10-26", expire: "2026-12-07",
+      outils: ["Google Analytics 4", "AB Tasty", "Quantum Metric", "Tableau"],
+      pourquoi: "Un stage 100 % CRO dans l'équipe e-commerce d'un groupe de luxe : repérer les frictions des parcours, lancer et analyser des A/B tests pour plusieurs maisons.",
+      pourquoiEn: "A 100% CRO internship in the e-commerce team of a luxury group: spotting journey frictions, running and analysing A/B tests for several fashion houses."
+    },
+    {
       titre: "Internship – Support on Conversational Analytics (janvier 2027)",
       entreprise: "LVMH", domaine: "lvmh.com", metier: "analytics", contrat: "stage", ville: "Paris (75)",
       lien: "https://fr.indeed.com/viewjob?jk=9ce710845ed466da", vuLe: "2026-10-16", expire: "2026-12-15",
@@ -63,6 +71,22 @@ window.JOBS = {
       lien: "https://fr.indeed.com/viewjob?jk=304aa3d45e79d35a", vuLe: "2026-10-16", expire: "2026-11-30",
       pourquoi: "Le tracking, c'est la compétence que nos talents disent avoir apprise sur le tas. Ici, elle est au programme dès le stage.",
       pourquoiEn: "Tracking is the skill our talents say they learned on the job. Here, it's part of the internship from day one."
+    },
+    {
+      titre: "Assistant·e Web Analytics – Stage (janvier 2027)",
+      entreprise: "Vente-unique.com", domaine: "vente-unique.com", metier: "analytics", contrat: "stage", ville: "Paris (75)",
+      lien: "https://www.glassdoor.fr/job-listing/assistant-e-web-analytics-stage-hf-vente-unique-com-JV_IC2881970_KO0,34_KE35,51.htm?jl=1010305466396", vuLe: "2026-10-26", expire: "2026-12-07",
+      outils: ["Google Analytics 4", "Google Tag Manager", "BigQuery", "Power BI"],
+      pourquoi: "Chez un pure player du meuble en ligne, on mesure l'effet des évolutions UX, on fiabilise le tracking et on analyse les parcours : le socle data d'un futur CRO.",
+      pourquoiEn: "At an online furniture pure player, you measure the impact of UX changes, make tracking reliable and analyse user journeys: the data foundation of a future CRO."
+    },
+    {
+      titre: "Consultant Web Analytics – Stage de 6 mois ou alternance (janvier 2027)",
+      entreprise: "Converteo", domaine: "converteo.com", metier: "analytics", contrat: "alternance", ville: "Paris (75)",
+      lien: "https://jobs.converteo.com/jobs/7613255-consultant-web-analytics-h-f-stage-de-6-mois-ou-alternance-janvier-2027", vuLe: "2026-10-26", expire: "2026-12-07",
+      outils: ["Google Tag Manager", "Tealium", "Piano Analytics", "Amplitude", "Contentsquare", "BigQuery", "Looker Studio"],
+      pourquoi: "Ouvert en alternance comme en stage : du plan de taggage à la recette des données, on y apprend le tracking web et app de bout en bout, sur plusieurs clients.",
+      pourquoiEn: "Open as a work-study contract or an internship: from tagging plan to data QA, you learn web and app tracking end to end, across several clients."
     },
     {
       titre: "Consultant(e) E-commerce – Stage de fin d'études",
@@ -98,6 +122,14 @@ window.JOBS = {
       lien: "https://fr.indeed.com/viewjob?jk=a00979e7db856836", vuLe: "2026-10-16", expire: "2026-11-30",
       pourquoi: "Les sciences cognitives appliquées aux interfaces : la psychologie derrière chaque friction, chaque clic, chaque hésitation.",
       pourquoiEn: "Cognitive science applied to interfaces: the psychology behind every friction, every click, every hesitation."
+    },
+    {
+      titre: "Stagiaire UI/UX Designer",
+      entreprise: "Printemps", domaine: "printemps.com", metier: "ux", contrat: "stage", ville: "Paris (75)",
+      lien: "https://www.glassdoor.fr/job-listing/stagiaire-ui-ux-designer-hf-printemps-JV_IC2881970_KO0,27_KE28,37.htm?jl=1010279190611", vuLe: "2026-10-26", expire: "2026-12-07",
+      outils: ["Figma"],
+      pourquoi: "De l'UX appliquée à quatre sites e-commerce d'un grand magasin : analyse de parcours, maquettes, prototypes et accessibilité, au plus près de la conversion.",
+      pourquoiEn: "UX applied to four e-commerce sites of a department store: journey analysis, mock-ups, prototypes and accessibility, right next to conversion."
     }
   ]
 };

@@ -75,6 +75,13 @@ window.JOBS = {
       pourquoiEn: "For those coming from design: understanding the user before testing is the heart of good CRO."
     },
     {
+      titre: "Stage Bac+5 – Sciences cognitives / Ergonomie",
+      entreprise: "Renault Group", domaine: "renaultgroup.com", metier: "ux", contrat: "stage", ville: "Guyancourt (78)",
+      lien: "https://fr.indeed.com/viewjob?jk=a00979e7db856836", vuLe: "2026-10-16", expire: "2026-11-30",
+      pourquoi: "Les sciences cognitives appliquées aux interfaces : la psychologie derrière chaque friction, chaque clic, chaque hésitation.",
+      pourquoiEn: "Cognitive science applied to interfaces: the psychology behind every friction, every click, every hesitation."
+    },
+    {
       titre: "Stagiaire UI/UX Designer",
       entreprise: "Printemps", domaine: "printemps.com", metier: "ux", contrat: "stage", ville: "Paris (75)",
       lien: "https://www.glassdoor.fr/job-listing/stagiaire-ui-ux-designer-hf-printemps-JV_IC2881970_KO0,27_KE28,37.htm?jl=1010279190611", vuLe: "2026-10-26", expire: "2026-12-07",

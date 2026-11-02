@@ -6,7 +6,8 @@
      - Sélection à la main : 10 à 15 offres vraiment CRO / analytics / UX / e-commerce.
      - On ne recopie pas l'annonce : titre, entreprise, lieu + une phrase « pourquoi on l'a retenue ».
        La candidature se fait sur l'annonce d'origine (lien).
-     - expire (AAAA-MM-JJ) : passé cette date, l'offre disparaît toute seule au build suivant.
+     - expire (AAAA-MM-JJ) : passé cette date, l'offre passe toute seule dans « Offres archivées » au build suivant.
+     - archivee: true : archive une offre sortie de la sélection ou fermée. On ne supprime pas les anciennes offres (SEO/GEO) : elles restent sur la page avec un badge.
        Par défaut, compter ~6 semaines après la date où l'offre a été vue.
      - metier : "cro" · "analytics" · "ux" · "ecommerce"
      - contrat : "stage" · "alternance" · "cdi" (premier poste) · "cdd"
@@ -135,6 +136,54 @@ window.JOBS = {
       outils: ["Google Analytics", "Power BI"],
       pourquoi: "Suivi quotidien de la performance du site, analyse des écarts aux objectifs et propositions d'amélioration : un stage où l'analyse débouche sur des actions.",
       pourquoiEn: "Daily site performance monitoring, analysis of gaps against targets and improvement proposals: an internship where analysis leads to action."
+    },
+    {
+      archivee: true,
+      titre: "Stagiaire SEO & CRO – Acquisition digitale",
+      entreprise: "Skill and You", domaine: "skillandyou.com", metier: "cro", contrat: "stage", ville: "Levallois-Perret (92)",
+      lien: "https://fr.indeed.com/viewjob?jk=aa18851c8765b563", vuLe: "2026-10-16", expire: "2026-11-30",
+      pourquoi: "Un stage qui relie acquisition et conversion : idéal pour comprendre tout le funnel, du trafic à la vente.",
+      pourquoiEn: "An internship that links acquisition and conversion: ideal to understand the whole funnel, from traffic to sale."
+    },
+    {
+      archivee: true,
+      titre: "Internship – Support on Conversational Analytics (janvier 2027)",
+      entreprise: "LVMH", domaine: "lvmh.com", metier: "analytics", contrat: "stage", ville: "Paris (75)",
+      lien: "https://fr.indeed.com/viewjob?jk=9ce710845ed466da", vuLe: "2026-10-16", expire: "2026-12-15",
+      pourquoi: "L'analytics appliquée aux conversations clients dans le luxe : un sujet d'avenir, là où chaque détail de l'expérience compte.",
+      pourquoiEn: "Analytics applied to customer conversations in luxury: a forward-looking topic, where every detail of the experience matters."
+    },
+    {
+      archivee: true,
+      titre: "Internship Product Data Analyst",
+      entreprise: "Cheerz", domaine: "cheerz.com", metier: "analytics", contrat: "stage", ville: "Paris (75)",
+      lien: "https://fr.indeed.com/viewjob?jk=6f7447e622b5c514", vuLe: "2026-10-16", expire: "2026-11-30",
+      pourquoi: "De la data produit chez un pure player e-commerce : le terrain de jeu idéal pour apprendre à transformer des chiffres en hypothèses.",
+      pourquoiEn: "Product data at an e-commerce pure player: the perfect playground to learn how to turn numbers into hypotheses."
+    },
+    {
+      archivee: true,
+      titre: "Stage – Data Analyst et Tracking",
+      entreprise: "Ekstend", metier: "analytics", contrat: "stage", ville: "Marseille (13)",
+      lien: "https://fr.indeed.com/viewjob?jk=304aa3d45e79d35a", vuLe: "2026-10-16", expire: "2026-11-30",
+      pourquoi: "Le tracking, c'est la compétence que nos talents disent avoir apprise sur le tas. Ici, elle est au programme dès le stage.",
+      pourquoiEn: "Tracking is the skill our talents say they learned on the job. Here, it's part of the internship from day one."
+    },
+    {
+      archivee: true,
+      titre: "Stage Business Analyst / PPO e-commerce",
+      entreprise: "VISEO", domaine: "viseo.com", metier: "ecommerce", contrat: "stage", ville: "Boulogne-Billancourt (92)",
+      lien: "https://fr.indeed.com/viewjob?jk=700324e35089060a", vuLe: "2026-10-16", expire: "2026-11-30",
+      pourquoi: "Côté produit e-commerce : apprendre à cadrer un besoin et à dialoguer avec les développeurs, deux réflexes clés du CRO.",
+      pourquoiEn: "On the e-commerce product side: learning to scope a need and to talk with developers, two key CRO reflexes."
+    },
+    {
+      archivee: true,
+      titre: "Stage Coordinateur e-commerce & animation commerciale B to C",
+      entreprise: "Nespresso", domaine: "nespresso.com", metier: "ecommerce", contrat: "stage", ville: "Paris (75)",
+      lien: "https://fr.indeed.com/viewjob?jk=e6eb150846231995", vuLe: "2026-10-16", expire: "2026-11-30",
+      pourquoi: "Le quotidien d'un site e-commerce de marque : animation, mises en avant, performance. La base avant d'optimiser.",
+      pourquoiEn: "The day-to-day of a brand e-commerce site: merchandising, promotions, performance. The basics before optimising."
     }
   ]
 };

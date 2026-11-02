@@ -263,11 +263,12 @@ function buildSite(SITE, RAW, opts) {
     { key: 'ux', nom: tr('UX & recherche utilisateur', 'UX & user research') }
   ];
   const CONTRATS = { stage: tr('Stage', 'Internship'), alternance: tr('Alternance', 'Work-study'), cdi: tr('CDI', 'Permanent'), cdd: tr('CDD', 'Fixed-term') };
-  const JOBS = JOBS_RAW ? list(JOBS_RAW.offres).filter(j => j && has(j.titre) && has(j.lien)).filter(j => {
+  const JOBS_TOUTES = JOBS_RAW ? list(JOBS_RAW.offres).filter(j => j && has(j.titre) && has(j.lien)).filter(j => {
     if (!METIERS.some(m => m.key === norm(j.metier))) warn('Offre « ' + j.titre + ' » : metier « ' + j.metier + ' » inconnu (cro, analytics, ux, ecommerce).');
-    if (has(j.expire) && j.expire < today) return false; // offre expirée : retirée automatiquement
     return true;
-  }).map(j => ({ titre: j.titre, entreprise: j.entreprise || '', metier: norm(j.metier), contrat: norm(j.contrat), ville: j.ville || '', lien: j.lien, domaine: j.domaine || '', outils: list(j.outils).map(canon), pourquoi: ENG ? (j.pourquoiEn || j.pourquoi || '') : (j.pourquoi || '') })) : [];
+  }).map(j => ({ archivee: !!j.archivee || (has(j.expire) && j.expire < today), titre: j.titre, entreprise: j.entreprise || '', metier: norm(j.metier), contrat: norm(j.contrat), ville: j.ville || '', lien: j.lien, domaine: j.domaine || '', outils: list(j.outils).map(canon), pourquoi: ENG ? (j.pourquoiEn || j.pourquoi || '') : (j.pourquoi || '') })) : [];
+  const JOBS = JOBS_TOUTES.filter(j => !j.archivee);
+  const JOBS_ARCHIVES = JOBS_TOUTES.filter(j => j.archivee);
   const JOBS_MAJ = JOBS_RAW && /^\d{4}-\d{2}-\d{2}$/.test(JOBS_RAW.majLe || '') ? JOBS_RAW.majLe : '';
   // Premier pas d'un talent : 1re expérience du parcours (+ type de contrat s'il est indiqué)
   const firstStep = p => {
@@ -712,6 +713,13 @@ function buildSite(SITE, RAW, opts) {
         }).join('') + '</div><p class="empty hidden" id="empty" data-tpl="' + tr('Aucune offre pour ce métier en ce moment.', 'No offer for this job family right now.') + '"></p>';
       }
       h += '</section>';
+      if (JOBS_ARCHIVES.length) h += `<section class="jobs jobs-archive" aria-labelledby="jobs-arch-h"><div class="row-between"><h2 class="h2" id="jobs-arch-h">${tr('Offres archivées', 'Archived offers')}</h2><p class="mono small">${plural(JOBS_ARCHIVES.length, tr('offre', 'offer'), tr('offres', 'offers'))}</p></div>` +
+        `<p class="note">${tr("Ces offres ne font plus partie de la sélection du moment et ont peut-être déjà été pourvues. On les garde pour montrer à quoi ressemblent les postes juniors du métier.", "These offers are no longer part of the current selection and may already be filled. We keep them to show what junior roles in the field look like.")}</p><ul class="job-list">` +
+        JOBS_ARCHIVES.map(j => `<li class="job job-archived c-${j.contrat}">` +
+          `<div class="job-top"><p class="job-meta"><span class="job-badge job-badge-closed">${tr('Offre archivée', 'Archived offer')}</span><span class="job-badge">${esc(CONTRATS[j.contrat] || j.contrat)}</span>${j.ville ? `<span class="job-city">${esc(j.ville)}</span>` : ''}</p>` +
+          `<h3 class="job-t">${esc(j.titre)}</h3><p class="job-co">${esc(j.entreprise)}</p></div>${jobLogo(j)}` +
+          (j.pourquoi ? `<p class="job-why"><span>${tr("Pourquoi on l'avait retenue", 'Why we picked it')}</span>${esc(j.pourquoi)}</p>` : '') +
+          `<div class="job-foot">${j.outils.length ? `<p class="job-tools">${j.outils.map(toolLink).join('')}</p>` : '<span></span>'}</div></li>`).join('') + '</ul></section>';
       if (EMAIL) h += `<section class="sec"><div class="sec-l"><p class="eyebrow pinkd">${tr('Recruteurs', 'Recruiters')}</p><h2 class="sec-h">${tr('Vous recrutez un junior en CRO ou e-commerce ?', 'Hiring a junior in CRO or e-commerce?')}</h2></div><div class="sec-b"><p>${tr("Envoyez votre offre : si elle correspond à l'esprit de la sélection, elle rejoint la page. Une offre déjà pourvue ? Dites-le aussi, on la retire.", 'Send us your offer: if it fits the spirit of the selection, it joins the page. Offer already filled? Let us know and we\'ll take it down.')}</p>` +
         `<p><a class="btn" href="mailto:${esc(EMAIL)}?subject=${encodeURIComponent(tr('Offre junior pour NextGen', 'Junior offer for NextGen'))}" data-umami-event="job-submit">${tr('Proposer une offre →', 'Submit an offer →')}</a></p></div></section>`;
       return h;

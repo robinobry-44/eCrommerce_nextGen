@@ -20,7 +20,7 @@
    ========================================================================== */
 
 window.JOBS = {
-  majLe: "2026-10-26",
+  majLe: "2026-11-02",
   offres: [
     {
       titre: "CRO Analyst Junior",
@@ -37,40 +37,12 @@ window.JOBS = {
       pourquoiEn: "CRO is right there in the job title, which is still rare for an internship, at a major player in automotive digital."
     },
     {
-      titre: "Stagiaire SEO & CRO – Acquisition digitale",
-      entreprise: "Skill and You", domaine: "skillandyou.com", metier: "cro", contrat: "stage", ville: "Levallois-Perret (92)",
-      lien: "https://fr.indeed.com/viewjob?jk=aa18851c8765b563", vuLe: "2026-10-16", expire: "2026-11-30",
-      pourquoi: "Un stage qui relie acquisition et conversion : idéal pour comprendre tout le funnel, du trafic à la vente.",
-      pourquoiEn: "An internship that links acquisition and conversion: ideal to understand the whole funnel, from traffic to sale."
-    },
-    {
       titre: "Stage Conversion Rate Optimization Specialist",
       entreprise: "Kering", domaine: "kering.com", metier: "cro", contrat: "stage", ville: "Paris (75)",
       lien: "https://www.glassdoor.fr/job-listing/kering-stage-conversion-rate-optimization-specialist-kering-JV_IC2881970_KO0,52_KE53,59.htm?jl=1010285961810", vuLe: "2026-10-26", expire: "2026-12-07",
       outils: ["Google Analytics 4", "AB Tasty", "Quantum Metric", "Tableau"],
       pourquoi: "Un stage 100 % CRO dans l'équipe e-commerce d'un groupe de luxe : repérer les frictions des parcours, lancer et analyser des A/B tests pour plusieurs maisons.",
       pourquoiEn: "A 100% CRO internship in the e-commerce team of a luxury group: spotting journey frictions, running and analysing A/B tests for several fashion houses."
-    },
-    {
-      titre: "Internship – Support on Conversational Analytics (janvier 2027)",
-      entreprise: "LVMH", domaine: "lvmh.com", metier: "analytics", contrat: "stage", ville: "Paris (75)",
-      lien: "https://fr.indeed.com/viewjob?jk=9ce710845ed466da", vuLe: "2026-10-16", expire: "2026-12-15",
-      pourquoi: "L'analytics appliquée aux conversations clients dans le luxe : un sujet d'avenir, là où chaque détail de l'expérience compte.",
-      pourquoiEn: "Analytics applied to customer conversations in luxury: a forward-looking topic, where every detail of the experience matters."
-    },
-    {
-      titre: "Internship Product Data Analyst",
-      entreprise: "Cheerz", domaine: "cheerz.com", metier: "analytics", contrat: "stage", ville: "Paris (75)",
-      lien: "https://fr.indeed.com/viewjob?jk=6f7447e622b5c514", vuLe: "2026-10-16", expire: "2026-11-30",
-      pourquoi: "De la data produit chez un pure player e-commerce : le terrain de jeu idéal pour apprendre à transformer des chiffres en hypothèses.",
-      pourquoiEn: "Product data at an e-commerce pure player: the perfect playground to learn how to turn numbers into hypotheses."
-    },
-    {
-      titre: "Stage – Data Analyst et Tracking",
-      entreprise: "Ekstend", metier: "analytics", contrat: "stage", ville: "Marseille (13)",
-      lien: "https://fr.indeed.com/viewjob?jk=304aa3d45e79d35a", vuLe: "2026-10-16", expire: "2026-11-30",
-      pourquoi: "Le tracking, c'est la compétence que nos talents disent avoir apprise sur le tas. Ici, elle est au programme dès le stage.",
-      pourquoiEn: "Tracking is the skill our talents say they learned on the job. Here, it's part of the internship from day one."
     },
     {
       titre: "Assistant·e Web Analytics – Stage (janvier 2027)",
@@ -96,32 +68,11 @@ window.JOBS = {
       pourquoiEn: "A data & e-commerce consultancy: several clients, several websites, a way to see a lot of cases in a short time."
     },
     {
-      titre: "Stage Business Analyst / PPO e-commerce",
-      entreprise: "VISEO", domaine: "viseo.com", metier: "ecommerce", contrat: "stage", ville: "Boulogne-Billancourt (92)",
-      lien: "https://fr.indeed.com/viewjob?jk=700324e35089060a", vuLe: "2026-10-16", expire: "2026-11-30",
-      pourquoi: "Côté produit e-commerce : apprendre à cadrer un besoin et à dialoguer avec les développeurs, deux réflexes clés du CRO.",
-      pourquoiEn: "On the e-commerce product side: learning to scope a need and to talk with developers, two key CRO reflexes."
-    },
-    {
-      titre: "Stage Coordinateur e-commerce & animation commerciale B to C",
-      entreprise: "Nespresso", domaine: "nespresso.com", metier: "ecommerce", contrat: "stage", ville: "Paris (75)",
-      lien: "https://fr.indeed.com/viewjob?jk=e6eb150846231995", vuLe: "2026-10-16", expire: "2026-11-30",
-      pourquoi: "Le quotidien d'un site e-commerce de marque : animation, mises en avant, performance. La base avant d'optimiser.",
-      pourquoiEn: "The day-to-day of a brand e-commerce site: merchandising, promotions, performance. The basics before optimising."
-    },
-    {
       titre: "Stage Product design / UX design",
       entreprise: "Bouygues Telecom", domaine: "bouyguestelecom.fr", metier: "ux", contrat: "stage", ville: "Meudon (92)",
       lien: "https://fr.indeed.com/viewjob?jk=5a0f5ea646bc6457", vuLe: "2026-10-16", expire: "2026-11-30",
       pourquoi: "Pour celles et ceux qui viennent du design : comprendre l'utilisateur avant de tester, c'est le cœur d'un bon CRO.",
       pourquoiEn: "For those coming from design: understanding the user before testing is the heart of good CRO."
-    },
-    {
-      titre: "Stage Bac+5 – Sciences cognitives / Ergonomie",
-      entreprise: "Renault Group", domaine: "renaultgroup.com", metier: "ux", contrat: "stage", ville: "Guyancourt (78)",
-      lien: "https://fr.indeed.com/viewjob?jk=a00979e7db856836", vuLe: "2026-10-16", expire: "2026-11-30",
-      pourquoi: "Les sciences cognitives appliquées aux interfaces : la psychologie derrière chaque friction, chaque clic, chaque hésitation.",
-      pourquoiEn: "Cognitive science applied to interfaces: the psychology behind every friction, every click, every hesitation."
     },
     {
       titre: "Stagiaire UI/UX Designer",
@@ -130,6 +81,53 @@ window.JOBS = {
       outils: ["Figma"],
       pourquoi: "De l'UX appliquée à quatre sites e-commerce d'un grand magasin : analyse de parcours, maquettes, prototypes et accessibilité, au plus près de la conversion.",
       pourquoiEn: "UX applied to four e-commerce sites of a department store: journey analysis, mock-ups, prototypes and accessibility, right next to conversion."
+    },
+    {
+      titre: "Intern E-business Performance Analyst (janvier 2027)",
+      entreprise: "Balenciaga", domaine: "balenciaga.com", metier: "analytics", contrat: "stage", ville: "Paris (75)",
+      lien: "https://fr.indeed.com/viewjob?jk=319ae68aa8549f2a", vuLe: "2026-11-02", expire: "2026-12-14",
+      outils: ["Google Analytics", "Contentsquare", "Tableau", "Power BI", "Looker Studio"],
+      pourquoi: "Suivi des KPI e-commerce, tableaux de bord sur le parcours client et analyses ponctuelles pour plusieurs équipes : un poste d'analyse de la performance en ligne, dans le luxe.",
+      pourquoiEn: "E-commerce KPI tracking, customer-journey dashboards and ad hoc analyses for several teams: an online performance analysis role, in luxury."
+    },
+    {
+      titre: "Stage Data Analytics eCommerce",
+      entreprise: "Kering", domaine: "kering.com", metier: "analytics", contrat: "stage", ville: "Paris (75)",
+      lien: "https://www.wizbii.com/company/kering/job/kering-stage-data-analytics-ecommerce", vuLe: "2026-11-02", expire: "2026-12-14",
+      outils: ["SQL", "Python"],
+      pourquoi: "Croiser ventes et tracking web, analyser les parcours pour repérer les frictions et mesurer l'impact des évolutions des sites : un stage directement relié à la conversion.",
+      pourquoiEn: "Combining sales and web tracking data, analysing journeys to spot frictions and measuring the impact of site changes: an internship directly tied to conversion."
+    },
+    {
+      titre: "Stage Business Analyste Web",
+      entreprise: "Nespresso", domaine: "nespresso.com", metier: "analytics", contrat: "stage", ville: "Paris (75)",
+      lien: "https://www.engagement-jeunes.com/fr/detail-offre/39694549/stage-nestle-operational-services-worldwide-sa-business-analyste-web-f-h.html", vuLe: "2026-11-02", expire: "2026-12-14",
+      outils: ["Google Analytics 4", "Adobe Analytics", "Contentsquare", "Looker Studio", "Power BI"],
+      pourquoi: "Performance du site et de l'app, études sur les parcours clients et évolution du tracking : le quotidien d'un web analyst, de la mesure à l'analyse.",
+      pourquoiEn: "Site and app performance, customer-journey studies and tracking evolution: the day-to-day of a web analyst, from measurement to analysis."
+    },
+    {
+      titre: "Assistant(e) E-Commerce – Stage (janvier 2027)",
+      entreprise: "Oh My Cream", domaine: "ohmycream.com", metier: "ecommerce", contrat: "stage", ville: "Paris (75)",
+      lien: "https://www.welcometothejungle.com/fr/companies/oh-my-cream/jobs/e-merchandising-internship-native-en_paris", vuLe: "2026-11-02", expire: "2026-12-14",
+      outils: ["Shopify"],
+      pourquoi: "Merchandising hebdomadaire des sites français et anglais, mise en ligne des nouveautés et suivi des pages produits : la gestion concrète d'un site e-commerce.",
+      pourquoiEn: "Weekly merchandising of the French and English sites, new product launches and product page upkeep: hands-on e-commerce site management."
+    },
+    {
+      titre: "Assistant·e Chef·fe de projets digitaux – Stage (janvier 2027)",
+      entreprise: "Maison 123", domaine: "maison123.com", metier: "ecommerce", contrat: "stage", ville: "Siège Maison 123",
+      lien: "https://career.maison123.com/jobs/8509600-assistant-e-chef-fe-de-projets-digitaux-stage-janvier-2027", vuLe: "2026-11-02", expire: "2026-12-14",
+      pourquoi: "Refonte de la plateforme, nouveaux modes de paiement et de livraison, site de seconde main et suivi des KPI : une vue complète des évolutions d'un site e-commerce.",
+      pourquoiEn: "Platform redesign, new payment and delivery options, a second-hand site and KPI tracking: a complete view of how an e-commerce site evolves."
+    },
+    {
+      titre: "Stage Business Analyst E-Commerce (janvier 2027)",
+      entreprise: "Galeries Lafayette", domaine: "galerieslafayette.com", metier: "ecommerce", contrat: "stage", ville: "Siège Galeries Lafayette",
+      lien: "https://carrieres.groupegalerieslafayette.com/jobs/8295690-stage-business-analyst-e-commerce-f-h", vuLe: "2026-11-02", expire: "2026-12-14",
+      outils: ["Google Analytics", "Power BI"],
+      pourquoi: "Suivi quotidien de la performance du site, analyse des écarts aux objectifs et propositions d'amélioration : un stage où l'analyse débouche sur des actions.",
+      pourquoiEn: "Daily site performance monitoring, analysis of gaps against targets and improvement proposals: an internship where analysis leads to action."
     }
   ]
 };

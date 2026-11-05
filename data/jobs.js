@@ -21,7 +21,7 @@
    ========================================================================== */
 
 window.JOBS = {
-  majLe: "2026-11-02",
+  majLe: "2026-11-05",
   offres: [
     {
       titre: "CRO Analyst Junior",
@@ -62,6 +62,7 @@ window.JOBS = {
       pourquoiEn: "Open as a work-study contract or an internship: from tagging plan to data QA, you learn web and app tracking end to end, across several clients."
     },
     {
+      archivee: true,
       titre: "Consultant(e) E-commerce – Stage de fin d'études",
       entreprise: "Converteo", domaine: "converteo.com", metier: "ecommerce", contrat: "stage", ville: "Paris (75)",
       lien: "https://fr.indeed.com/viewjob?jk=1eaa56e999a44311", vuLe: "2026-10-16", expire: "2026-11-30",
@@ -136,6 +137,14 @@ window.JOBS = {
       outils: ["Google Analytics", "Power BI"],
       pourquoi: "Suivi quotidien de la performance du site, analyse des écarts aux objectifs et propositions d'amélioration : un stage où l'analyse débouche sur des actions.",
       pourquoiEn: "Daily site performance monitoring, analysis of gaps against targets and improvement proposals: an internship where analysis leads to action."
+    },
+    {
+      titre: "Data Analyst Intern (janvier 2027)",
+      entreprise: "Back Market", domaine: "backmarket.com", metier: "analytics", contrat: "stage", ville: "Barcelone (Espagne)",
+      lien: "https://www.welcometothejungle.com/fr/companies/back-market/jobs/data-analyst-intern_barcelona", vuLe: "2026-11-05", expire: "2026-12-17",
+      outils: ["SQL", "Google Analytics", "Amplitude"],
+      pourquoi: "Dans l'équipe data Care & Shipping d'une marketplace, des analyses pour améliorer les processus et la satisfaction client, avec des recommandations présentées aux équipes métiers.",
+      pourquoiEn: "In a marketplace's Care & Shipping data team, analyses to improve processes and customer satisfaction, with recommendations presented to business teams."
     },
     {
       archivee: true,

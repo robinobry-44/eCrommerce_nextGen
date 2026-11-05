@@ -679,7 +679,7 @@ function buildSite(SITE, RAW, opts) {
   if (JOBS_RAW) page({
     path: 'premier-job/', nav: 'jobs', priority: '0.8', lastmod: JOBS_MAJ || LAST, script: true, crumbs: [[tr('Premier job', 'First job'), 'premier-job/']],
     title: tr('Premier job CRO & e-commerce : stages et alternances — ', 'First job in CRO & e-commerce: internships and work-study — ') + BRAND,
-    desc: clamp(ENG ? `How the Next Gen got started, and a hand-picked selection of junior offers in CRO, web analytics, UX and e-commerce (${plural(JOBS.length, 'offer', 'offers')}, France).` : `Comment la Next Gen a démarré, et une sélection d'offres juniors en CRO, web analytics, UX et e-commerce : ${plural(JOBS.length, 'stage ou alternance', 'stages et alternances')} choisis à la main.`),
+    desc: clamp(ENG ? `How the Next Gen got started, and a hand-picked selection of junior offers in CRO, web analytics, UX and e-commerce (${plural(JOBS.length, 'offer', 'offers')}).` : `Comment la Next Gen a démarré, et une sélection d'offres juniors en CRO, web analytics, UX et e-commerce : ${plural(JOBS.length, 'stage ou alternance', 'stages et alternances')} choisis à la main.`),
     ld: [{ '@type': 'CollectionPage', name: tr('Premier job CRO & e-commerce', 'First job in CRO & e-commerce'), url: U('premier-job/'), inLanguage: INLANG, isPartOf: { '@id': abs('#website') }, dateModified: JOBS_MAJ || undefined }],
     main: L => {
       const jobLogo = j => { const d = j.domaine || LOGOS[norm(canon(j.entreprise))]; return `<span class="job-logo" aria-hidden="true"><span class="job-ini">${esc(initials(j.entreprise))}</span>${d ? `<img src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(d)}&amp;sz=256" alt="" width="64" height="64" loading="lazy" onerror="this.remove()">` : ''}</span>`; };
@@ -696,7 +696,7 @@ function buildSite(SITE, RAW, opts) {
       }
       const fams = METIERS.filter(m => JOBS.some(j => j.metier === m.key));
       h += `<section class="jobs" aria-labelledby="jobs-h"><div class="row-between"><h2 class="h2" id="jobs-h">${tr('Les offres du moment', 'Current offers')}</h2><p class="mono small" id="result-label" data-one="${tr('offre', 'offer')}" data-many="${tr('offres', 'offers')}" aria-live="polite">${plural(JOBS.length, tr('offre', 'offer'), tr('offres', 'offers'))}</p></div>` +
-        `<p class="note">${tr("Sélectionnées à la main par NextGen sur les sites d'emploi. La candidature se fait sur l'annonce d'origine.", 'Hand-picked by NextGen from job boards. Offers are in France; you apply on the original listing.')}</p>`;
+        `<p class="note">${tr("Sélectionnées à la main par NextGen sur les sites d'emploi. La candidature se fait sur l'annonce d'origine.", 'Hand-picked by NextGen from job boards. You apply on the original listing.')}</p>`;
       if (!JOBS.length) h += `<p class="empty">${tr('Pas d\'offre sélectionnée pour le moment : la prochaine sélection arrive bientôt.', 'No offers selected right now: the next selection is coming soon.')}</p>`;
       else {
         if (fams.length > 1) h += `<div class="filters js-only" role="group" aria-label="${tr('Filtrer par métier', 'Filter by job family')}"><button type="button" class="filter on" data-filter="metier" data-value="" aria-pressed="true">${tr('Tous', 'All')}</button>${fams.map(m => `<button type="button" class="filter" data-filter="metier" data-value="${m.key}" aria-pressed="false">${esc(m.nom)} <small>${JOBS.filter(j => j.metier === m.key).length}</small></button>`).join('')}</div>`;

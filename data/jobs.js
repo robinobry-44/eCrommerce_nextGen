@@ -3,11 +3,11 @@
    Page : /premier-job/ (et /en/first-job/).
 
    ► RÈGLES
-     - Sélection à la main : 10 à 15 offres vraiment CRO / analytics / UX / e-commerce.
+     - Sélection à la main, sans limite de nombre : offres vraiment CRO / analytics / UX / e-commerce, en France et à l'étranger (indiquer le pays dans ville).
      - On ne recopie pas l'annonce : titre, entreprise, lieu + une phrase « pourquoi on l'a retenue ».
        La candidature se fait sur l'annonce d'origine (lien).
      - expire (AAAA-MM-JJ) : passé cette date, l'offre passe toute seule dans « Offres archivées » au build suivant.
-     - archivee: true : archive une offre sortie de la sélection ou fermée. On ne supprime pas les anciennes offres (SEO/GEO) : elles restent sur la page avec un badge.
+     - archivee: true : archive une offre fermée. On ne supprime pas les anciennes offres (SEO/GEO) : elles restent sur la page avec un badge.
        Par défaut, compter ~6 semaines après la date où l'offre a été vue.
      - metier : "cro" · "analytics" · "ux" · "ecommerce"
      - contrat : "stage" · "alternance" · "cdi" (premier poste) · "cdd"
@@ -62,7 +62,6 @@ window.JOBS = {
       pourquoiEn: "Open as a work-study contract or an internship: from tagging plan to data QA, you learn web and app tracking end to end, across several clients."
     },
     {
-      archivee: true,
       titre: "Consultant(e) E-commerce – Stage de fin d'études",
       entreprise: "Converteo", domaine: "converteo.com", metier: "ecommerce", contrat: "stage", ville: "Paris (75)",
       lien: "https://fr.indeed.com/viewjob?jk=1eaa56e999a44311", vuLe: "2026-10-16", expire: "2026-11-30",
@@ -147,7 +146,6 @@ window.JOBS = {
       pourquoiEn: "In a marketplace's Care & Shipping data team, analyses to improve processes and customer satisfaction, with recommendations presented to business teams."
     },
     {
-      archivee: true,
       titre: "Stagiaire SEO & CRO – Acquisition digitale",
       entreprise: "Skill and You", domaine: "skillandyou.com", metier: "cro", contrat: "stage", ville: "Levallois-Perret (92)",
       lien: "https://fr.indeed.com/viewjob?jk=aa18851c8765b563", vuLe: "2026-10-16", expire: "2026-11-30",
@@ -155,7 +153,6 @@ window.JOBS = {
       pourquoiEn: "An internship that links acquisition and conversion: ideal to understand the whole funnel, from traffic to sale."
     },
     {
-      archivee: true,
       titre: "Internship – Support on Conversational Analytics (janvier 2027)",
       entreprise: "LVMH", domaine: "lvmh.com", metier: "analytics", contrat: "stage", ville: "Paris (75)",
       lien: "https://fr.indeed.com/viewjob?jk=9ce710845ed466da", vuLe: "2026-10-16", expire: "2026-12-15",
@@ -163,7 +160,6 @@ window.JOBS = {
       pourquoiEn: "Analytics applied to customer conversations in luxury: a forward-looking topic, where every detail of the experience matters."
     },
     {
-      archivee: true,
       titre: "Internship Product Data Analyst",
       entreprise: "Cheerz", domaine: "cheerz.com", metier: "analytics", contrat: "stage", ville: "Paris (75)",
       lien: "https://fr.indeed.com/viewjob?jk=6f7447e622b5c514", vuLe: "2026-10-16", expire: "2026-11-30",
@@ -171,7 +167,6 @@ window.JOBS = {
       pourquoiEn: "Product data at an e-commerce pure player: the perfect playground to learn how to turn numbers into hypotheses."
     },
     {
-      archivee: true,
       titre: "Stage – Data Analyst et Tracking",
       entreprise: "Ekstend", metier: "analytics", contrat: "stage", ville: "Marseille (13)",
       lien: "https://fr.indeed.com/viewjob?jk=304aa3d45e79d35a", vuLe: "2026-10-16", expire: "2026-11-30",
@@ -179,7 +174,6 @@ window.JOBS = {
       pourquoiEn: "Tracking is the skill our talents say they learned on the job. Here, it's part of the internship from day one."
     },
     {
-      archivee: true,
       titre: "Stage Business Analyst / PPO e-commerce",
       entreprise: "VISEO", domaine: "viseo.com", metier: "ecommerce", contrat: "stage", ville: "Boulogne-Billancourt (92)",
       lien: "https://fr.indeed.com/viewjob?jk=700324e35089060a", vuLe: "2026-10-16", expire: "2026-11-30",
@@ -187,7 +181,6 @@ window.JOBS = {
       pourquoiEn: "On the e-commerce product side: learning to scope a need and to talk with developers, two key CRO reflexes."
     },
     {
-      archivee: true,
       titre: "Stage Coordinateur e-commerce & animation commerciale B to C",
       entreprise: "Nespresso", domaine: "nespresso.com", metier: "ecommerce", contrat: "stage", ville: "Paris (75)",
       lien: "https://fr.indeed.com/viewjob?jk=e6eb150846231995", vuLe: "2026-10-16", expire: "2026-11-30",

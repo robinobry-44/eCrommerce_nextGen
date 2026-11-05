@@ -266,7 +266,7 @@ function buildSite(SITE, RAW, opts) {
   const JOBS_TOUTES = JOBS_RAW ? list(JOBS_RAW.offres).filter(j => j && has(j.titre) && has(j.lien)).filter(j => {
     if (!METIERS.some(m => m.key === norm(j.metier))) warn('Offre « ' + j.titre + ' » : metier « ' + j.metier + ' » inconnu (cro, analytics, ux, ecommerce).');
     return true;
-  }).map(j => ({ archivee: !!j.archivee || (has(j.expire) && j.expire < today), titre: j.titre, entreprise: j.entreprise || '', metier: norm(j.metier), contrat: norm(j.contrat), ville: j.ville || '', lien: j.lien, domaine: j.domaine || '', outils: list(j.outils).map(canon), pourquoi: ENG ? (j.pourquoiEn || j.pourquoi || '') : (j.pourquoi || '') })) : [];
+  }).map(j => ({ archivee: !!j.archivee, titre: j.titre, entreprise: j.entreprise || '', metier: norm(j.metier), contrat: norm(j.contrat), ville: j.ville || '', lien: j.lien, domaine: j.domaine || '', outils: list(j.outils).map(canon), pourquoi: ENG ? (j.pourquoiEn || j.pourquoi || '') : (j.pourquoi || '') })) : [];
   const JOBS = JOBS_TOUTES.filter(j => !j.archivee);
   const JOBS_ARCHIVES = JOBS_TOUTES.filter(j => j.archivee);
   const JOBS_MAJ = JOBS_RAW && /^\d{4}-\d{2}-\d{2}$/.test(JOBS_RAW.majLe || '') ? JOBS_RAW.majLe : '';
@@ -714,7 +714,7 @@ function buildSite(SITE, RAW, opts) {
       }
       h += '</section>';
       if (JOBS_ARCHIVES.length) h += `<section class="jobs jobs-archive" aria-labelledby="jobs-arch-h"><div class="row-between"><h2 class="h2" id="jobs-arch-h">${tr('Offres archivées', 'Archived offers')}</h2><p class="mono small">${plural(JOBS_ARCHIVES.length, tr('offre', 'offer'), tr('offres', 'offers'))}</p></div>` +
-        `<p class="note">${tr("Ces offres ne font plus partie de la sélection du moment et ont peut-être déjà été pourvues. On les garde pour montrer à quoi ressemblent les postes juniors du métier.", "These offers are no longer part of the current selection and may already be filled. We keep them to show what junior roles in the field look like.")}</p><ul class="job-list">` +
+        `<p class="note">${tr("Ces offres ont été pourvues ou ne sont plus en ligne. On les garde pour montrer à quoi ressemblent les postes juniors du métier.", "These offers have been filled or are no longer online. We keep them to show what junior roles in the field look like.")}</p><ul class="job-list">` +
         JOBS_ARCHIVES.map(j => `<li class="job job-archived c-${j.contrat}">` +
           `<div class="job-top"><p class="job-meta"><span class="job-badge job-badge-closed">${tr('Offre archivée', 'Archived offer')}</span><span class="job-badge">${esc(CONTRATS[j.contrat] || j.contrat)}</span>${j.ville ? `<span class="job-city">${esc(j.ville)}</span>` : ''}</p>` +
           `<h3 class="job-t">${esc(j.titre)}</h3><p class="job-co">${esc(j.entreprise)}</p></div>${jobLogo(j)}` +

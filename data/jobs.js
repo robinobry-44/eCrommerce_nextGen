@@ -6,8 +6,8 @@
      - Sélection à la main, sans limite de nombre : offres vraiment CRO / analytics / UX / e-commerce, en France et à l'étranger (indiquer le pays dans ville).
      - On ne recopie pas l'annonce : titre, entreprise, lieu + une phrase « pourquoi on l'a retenue ».
        La candidature se fait sur l'annonce d'origine (lien).
-     - expire (AAAA-MM-JJ) : passé cette date, l'offre passe toute seule dans « Offres archivées » au build suivant.
-     - archivee: true : archive une offre fermée. On ne supprime pas les anciennes offres (SEO/GEO) : elles restent sur la page avec un badge.
+     - expire (AAAA-MM-JJ) : date indicative (~6 semaines après vuLe) pour revérifier l'offre. Elle n'archive rien : une offre dont la date est passée reste active.
+     - archivee: true : uniquement si l'annonce est indiquée comme pourvue ou a disparu des sites. Jamais pour une autre raison (ni date passée, ni manque de place, ni page illisible). On ne supprime jamais une offre (SEO/GEO) : elle reste sur la page avec un badge.
        Par défaut, compter ~6 semaines après la date où l'offre a été vue.
      - metier : "cro" · "analytics" · "ux" · "ecommerce"
      - contrat : "stage" · "alternance" · "cdi" (premier poste) · "cdd"

@@ -516,3 +516,36 @@ a.chip:hover{background:var(--pink);color:#fff}
 .job-go{white-space:nowrap}
 @media (max-width:640px){.job{padding:18px;gap:14px}.job-logo{width:64px;height:64px;border-radius:16px}.job-ini{font-size:22px}.fp-grid{grid-template-columns:1fr}}
 .job-top>*,.job-why,.job-tools{margin:0}
+
+/* ---------- Premier job : pages par offre ---------- */
+.job-t a{color:inherit;text-decoration:none}
+.job-t a:hover{text-decoration:underline;text-decoration-color:var(--pink);text-underline-offset:4px}
+.job-acts{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-left:auto}
+.job-ext{font-size:14px;color:var(--text2);text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.job-ext:hover{color:var(--pink-d)}
+.h3{font-size:clamp(22px,2.2vw,30px);line-height:1.1;letter-spacing:-.03em;font-weight:800;text-wrap:balance}
+.offer-h1{font-size:clamp(32px,4.6vw,60px);line-height:1;letter-spacing:-.045em;text-wrap:balance;overflow-wrap:anywhere}
+.offer-closed{padding:14px 18px;border:1.5px solid var(--line);border-radius:16px;background:var(--bg);font-size:16px;line-height:1.5;margin-bottom:24px}
+.offer-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:40px;align-items:start}
+.offer-main{display:flex;flex-direction:column;gap:18px;max-width:760px}
+.offer-main>p{font-size:clamp(18px,1.5vw,20px);line-height:1.65}
+.offer-main .h3{margin-top:18px}
+.offer-note{font-size:14px;line-height:1.5;color:var(--muted2);margin-top:10px}
+.offer-rel{list-style:none;padding:0;display:flex;flex-direction:column;gap:14px}
+.offer-rel .fp-i{align-items:flex-start}
+.offer-rel .fp-row{font-size:16px;line-height:1.5}
+.offer-aside{position:sticky;top:96px;display:flex;flex-direction:column;gap:16px;padding:24px;background:#fff;border:1.5px solid var(--line);border-radius:26px}
+.offer-logo{width:96px;height:96px}
+.offer-facts{display:flex;flex-direction:column;gap:12px}
+.offer-facts div{display:flex;flex-direction:column;gap:2px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.offer-facts dt{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--pink-d)}
+.offer-facts dd{font-size:16px;line-height:1.4;font-weight:600}
+.offer-go{text-align:center;justify-content:center}
+.offer-more{margin-top:56px}
+.offer-more-l{list-style:none;padding:0;margin:20px 0 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:14px}
+.offer-more-l a{display:flex;flex-direction:column;align-items:flex-start;gap:8px;height:100%;padding:18px;border:1.5px solid var(--line);border-radius:20px;background:#fff;color:var(--ink);text-decoration:none}
+.offer-more-l a:hover{border-color:var(--pink)}
+.offer-more-l strong{font-size:18px;line-height:1.2;letter-spacing:-.02em}
+.offer-more-l a>span:last-child{font-size:14px;color:var(--text2)}
+.offer-more p{margin-top:18px}
+@media (max-width:900px){.offer-grid{grid-template-columns:1fr;gap:28px}.offer-aside{position:static;order:-1}}

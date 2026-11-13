@@ -765,7 +765,7 @@ function buildSite(SITE, RAW, opts) {
           (j.avis.length ? `<h2 class="h3">${tr('Notre regard', 'Our take')}</h2>` + j.avis.map(t => `<p>${esc(t)}</p>`).join('') : '') +
           (j.relais.length ? `<h2 class="h3">${tr("Ce qu'en disent nos talents", 'What our talents say')}</h2><ul class="offer-rel">` + j.relais.map(r => `<li><a class="fp-i" href="${L(r.p.path)}">${portrait(r.p, L, { cls: 'sm' })}<span class="fp-txt"><strong>${esc(r.p.nom)}</strong><span class="fp-row"><span class="fp-k">${esc(r.p.poste)} · ${esc(r.p.entreprise)}</span>${esc(r.txt)}</span></span></a></li>`).join('') + '</ul>' : '') +
           (j.conseil ? `<h2 class="h3">${tr('Pour candidater', 'Applying')}</h2><p>${esc(j.conseil)}</p>` : '') +
-          `<p class="note offer-note">${tr("Texte rédigé par NextGen à partir de l'annonce, il ne la reproduit pas. Missions, dates, rémunération et conditions : seule l'annonce d'origine fait foi.", "Written by NextGen from the listing; it does not reproduce it. Duties, dates, pay and conditions: only the original listing is authoritative.")}</p></article>` +
+          `</article>` +
           `<aside class="offer-aside" aria-label="${tr("L'essentiel", 'Key facts')}">${logoBox}<h2 class="eyebrow">${tr("L'essentiel", 'Key facts')}</h2><dl class="offer-facts">` +
           `<div><dt>${tr('Entreprise', 'Company')}</dt><dd>${esc(j.entreprise)}</dd></div><div><dt>${tr('Contrat', 'Contract')}</dt><dd>${esc(contrat)}</dd></div>` +
           (j.ville ? `<div><dt>${tr('Lieu', 'Location')}</dt><dd>${esc(j.ville)}</dd></div>` : '') + (metier ? `<div><dt>${tr('Métier', 'Field')}</dt><dd>${esc(metier.nom)}</dd></div>` : '') +

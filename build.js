@@ -270,7 +270,7 @@ function buildSite(SITE, RAW, opts) {
     const slug = has(j.slug) ? slugify(j.slug) : slugify((j.entreprise || '') + ' ' + j.titre);
     return { slug, path: 'premier-job/' + slug + '/', archivee: !!j.archivee, titre: j.titre, entreprise: j.entreprise || '', metier: norm(j.metier), contrat: norm(j.contrat), ville: j.ville || '', lien: j.lien, domaine: j.domaine || '', vuLe: /^\d{4}-\d{2}-\d{2}$/.test(j.vuLe || '') ? j.vuLe : '', outils: list(j.outils).map(canon),
       pourquoi: ENG ? (j.pourquoiEn || j.pourquoi || '') : (j.pourquoi || ''),
-      avis: list(ENG ? (j.avisEn || j.avis) : j.avis), conseil: ENG ? (j.conseilEn || j.conseil || '') : (j.conseil || ''),
+      fiche: (ENG ? (j.ficheEn || j.fiche) : j.fiche) || null, avis: list(ENG ? (j.avisEn || j.avis) : j.avis), conseil: ENG ? (j.conseilEn || j.conseil || '') : (j.conseil || ''),
       relais: list(j.relais).filter(r => r && bySlug[r.slug]).map(r => ({ p: bySlug[r.slug], txt: ENG ? (r.en || r.fr || '') : (r.fr || '') })) };
   }) : [];
   { const seen = {}; JOBS_TOUTES.forEach(j => { if (seen[j.slug]) warn('Offre « ' + j.titre + ' » : slug en double « ' + j.slug + ' ».'); seen[j.slug] = 1; if (!j.avis.length) warn('Offre « ' + j.titre + ' » : pas de texte « avis » (la page de l\'offre sera minimale).'); }); }
@@ -745,7 +745,11 @@ function buildSite(SITE, RAW, opts) {
   /* ---------- PREMIER JOB : une page par offre (texte rédigé par NextGen, jamais recopié) ---------- */
   if (JOBS_RAW) JOBS_TOUTES.forEach(j => {
     const metier = METIERS.find(m => m.key === j.metier), contrat = CONTRATS[j.contrat] || j.contrat;
-    const lieu = j.ville ? ', ' + j.ville : '';
+    const ul = a => `<ul class="offer-list">${list(a).map(x => `<li>${esc(x)}</li>`).join('')}</ul>`;
+    const ficheHtml = f => `<h2 class="h3">${tr('Le poste', 'The role')}</h2>${f.equipe ? `<p>${esc(f.equipe)}</p>` : ''}${ul(f.missions)}` +
+      (list(f.profil).length ? `<h2 class="h3">${tr('Le profil recherché', 'Who they are looking for')}</h2>${ul(f.profil)}` : '') +
+      (list(f.conditions).length ? `<h2 class="h3">${tr('Les conditions', 'Terms')}</h2>${ul(f.conditions)}` : '') +
+      (f.luLe ? `<p class="offer-note">${tr('Informations relevées sur l\'annonce d\'origine le ', 'Details taken from the original listing on ')}<time datetime="${f.luLe}">${esc(fmtDate(f.luLe))}</time>.</p>` : '');
     page({
       path: j.path, nav: 'jobs', priority: j.archivee ? '0.4' : '0.7', lastmod: j.vuLe || JOBS_MAJ || LAST, ogType: 'article',
       crumbs: [[tr('Premier job', 'First job'), 'premier-job/'], [j.titre, j.path]],
@@ -762,6 +766,7 @@ function buildSite(SITE, RAW, opts) {
           `<h1 class="h1 offer-h1">${esc(j.titre)}</h1><p class="lead wide"><strong>${esc(j.entreprise)}</strong>${j.ville ? ' · ' + esc(j.ville) : ''}${j.pourquoi ? '. ' + esc(j.pourquoi) : ''}</p></section>`;
         if (j.archivee) h += `<p class="offer-closed" role="note"><strong>${tr('Offre archivée.', 'Archived offer.')}</strong> ${tr("Cette annonce a été pourvue ou n'est plus en ligne. On garde la page pour montrer à quoi ressemblent les postes juniors du métier.", 'This listing has been filled or is no longer online. We keep the page to show what junior roles in the field look like.')}</p>`;
         h += '<div class="offer-grid"><article class="offer-main">' +
+          (j.fiche ? ficheHtml(j.fiche) : '') +
           (j.avis.length ? `<h2 class="h3">${tr('Notre regard', 'Our take')}</h2>` + j.avis.map(t => `<p>${esc(t)}</p>`).join('') : '') +
           (j.relais.length ? `<h2 class="h3">${tr("Ce qu'en disent nos talents", 'What our talents say')}</h2><ul class="offer-rel">` + j.relais.map(r => `<li><a class="fp-i" href="${L(r.p.path)}">${portrait(r.p, L, { cls: 'sm' })}<span class="fp-txt"><strong>${esc(r.p.nom)}</strong><span class="fp-row"><span class="fp-k">${esc(r.p.poste)} · ${esc(r.p.entreprise)}</span>${esc(r.txt)}</span></span></a></li>`).join('') + '</ul>' : '') +
           (j.conseil ? `<h2 class="h3">${tr('Pour candidater', 'Applying')}</h2><p>${esc(j.conseil)}</p>` : '') +

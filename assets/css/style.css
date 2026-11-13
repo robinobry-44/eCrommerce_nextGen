@@ -552,3 +552,6 @@ a.chip:hover{background:var(--pink);color:#fff}
 
 /* Blocs offres */
 .offer-teaser{margin-top:56px;margin-bottom:24px}
+
+.offer-list{margin:0;padding-left:1.2em;list-style:disc;display:flex;flex-direction:column;gap:10px;font-size:clamp(17px,1.4vw,19px);line-height:1.6}
+.offer-list li::marker{color:var(--pink-d)}

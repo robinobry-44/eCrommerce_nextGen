@@ -749,7 +749,7 @@ function buildSite(SITE, RAW, opts) {
     const ficheHtml = f => `<h2 class="h3">${tr('Le poste', 'The role')}</h2>${f.equipe ? `<p>${esc(f.equipe)}</p>` : ''}${ul(f.missions)}` +
       (list(f.profil).length ? `<h2 class="h3">${tr('Le profil recherché', 'Who they are looking for')}</h2>${ul(f.profil)}` : '') +
       (list(f.conditions).length ? `<h2 class="h3">${tr('Les conditions', 'Terms')}</h2>${ul(f.conditions)}` : '') +
-      (f.luLe ? `<p class="offer-note">${tr('Informations relevées sur l\'annonce d\'origine le ', 'Details taken from the original listing on ')}<time datetime="${f.luLe}">${esc(fmtDate(f.luLe))}</time>.</p>` : '');
+      `<p class="offer-note">${f.debut ? tr('Démarrage souhaité : ', 'Desired start date: ') + esc(f.debut) : tr('Date de démarrage non indiquée dans l\'annonce.', 'Start date not stated in the listing.')}</p>`;
     page({
       path: j.path, nav: 'jobs', priority: j.archivee ? '0.4' : '0.7', lastmod: j.vuLe || JOBS_MAJ || LAST, ogType: 'article',
       crumbs: [[tr('Premier job', 'First job'), 'premier-job/'], [j.titre, j.path]],

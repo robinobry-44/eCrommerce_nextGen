@@ -507,7 +507,7 @@ function buildSite(SITE, RAW, opts) {
         h += `<nav class="crumbs" aria-label="${tr("Fil d'Ariane", 'Breadcrumb')}"><a href="${L('talents/')}">${tr('← Tous les Talents', '← All Talents')}</a>${multi ? `<span><a href="${L(prev.path)}">← ${esc(prev.nom)}</a><a href="${L(next.path)}">${esc(next.nom)} →</a></span>` : ''}</nav>`;
         h += '<article class="fiche">';
         h += `<header class="ph"><div class="ph-txt"><p class="eyebrow pinkd">NEXTGEN #${p.num} · ${PROMO}${esc(p.promo)}</p>` +
-          `<h1><span class="ph-name">${esc(p.nom)}</span><span class="vh"> — </span><span class="ph-role">${esc(p.poste)}<span class="vh">${tr(' chez ', ' at ')}</span></span>${co(p.entreprise, 40, 'co-lg')}</h1>` +
+          `<h1><span class="ph-name"${(L => L > 10 ? ` style="--s:${(10 / L).toFixed(2)}"` : '')(Math.max(...String(p.nom).split(/\s+/).map(w => [...w].length)))}>${esc(p.nom)}</span><span class="vh"> — </span><span class="ph-role">${esc(p.poste)}<span class="vh">${tr(' chez ', ' at ')}</span></span>${co(p.entreprise, 40, 'co-lg')}</h1>` +
           xps(p.expertises) + (p.citation ? `<blockquote class="ph-q"><p>${OQ}${esc(p.citation)}${CQ}</p><footer>— ${esc(p.nom)}</footer></blockquote>` : '') + sample(p) +
           `<p class="ph-meta mono">${tr('Interview par', 'Interview by')} <a href="${L('a-propos/')}">${esc(AUTHOR.nom || '')}</a>${p.dateLabel ? ` · <time datetime="${p.date}">${esc(p.dateLabel)}</time>` : ''}</p>${liBtn(p, P, 'hero')}</div>` +
           `<div class="ph-photo">${portrait(p, L, { eager: true, cls: 'xl', sizes: '(max-width: 900px) 100vw, 45vw' })}</div></header>`;

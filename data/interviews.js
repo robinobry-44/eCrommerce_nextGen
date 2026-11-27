@@ -253,5 +253,60 @@ window.INTERVIEWS = [
     methode: { titre: "Le protocole de Salomé avant chaque test", synthese: true, etapes: [{ titre: "Croiser les sources", texte: "Data quantitative et qualitative (session replays, appels clients, équipes support) avant toute hypothèse." }, { titre: "Poser une vraie hypothèse", texte: "Jamais de test basé uniquement sur du ressenti ou une seule métrique." }, { titre: "Prioriser", texte: "Passer chaque idée dans une grille de priorisation type ICE pour éviter les choix à l'affect." }, { titre: "Apprendre de chaque résultat", texte: "Un test négatif n'est jamais un échec : c'est une donnée qui évite une mauvaise décision à grande échelle." }] },
     aRetenir: { synthese: true, points: [{ titre: "La qualité avant le volume.", texte: "Moins de tests pour tester, plus d'hypothèses solides et priorisées." }, { titre: "Le quanti dit quoi, le quali dit pourquoi.", texte: "Croiser les deux est le seul moyen d'isoler les vraies frictions." }, { titre: "Le CRO est un sport d'équipe.", texte: "Sans designers, développeurs et équipes produit embarqués, les insights restent au placard." }] },
     motsCles: ["Apprentissage"]
+  },
+  {
+    slug: "lisa-kolodziejczak",
+    metier: "ux",                 // famille de métier (page Premier job) : cro · analytics · ux · ecommerce
+    nom: "Lisa Kolodziejczak",
+    poste: "UX Product Designer",
+    entreprise: "Maison de Haute Joaillerie",
+    typeProfil: "annonceur",
+    secteur: "Luxe",
+    date: "2026-11-27",
+    promo: "2026",
+    numero: 4,
+    featured: true,
+    photo: "images/interviews/lisa-kolodziejczak.jpg",
+    photos: [],
+    lienLinkedin: "",
+    expertises: ["UX", "CRO", "Product"],
+    citation: "Si on est à l'aise, c'est qu'on maîtrise.",
+    accroche: "On ne peut pas optimiser et créer des variations impactantes sans l'UX et la user research.",
+    intro: "Lisa Kolodziejczak est UX Product Designer au sein d'une Maison de Haute Joaillerie. Elle a commencé comme web analyste et chargée de CRO chez Decathlon Pro, la filiale BtoB de Decathlon, où elle a acquis un mindset data driven et le réflexe de toujours placer l'utilisateur au centre : ses frictions, ses besoins, ses motivations. Elle a ensuite rejoint Welyft, agence spécialisée en data marketing et en expérimentation, où travailler pour des clients aux organisations et aux enjeux différents l'a fait progresser vite. Aujourd'hui, elle développe une nouvelle expertise côté UX. Dans cette interview, elle parle du cloisonnement entre data, CRO, UX, business et tech, de l'usage des AI design generators pour se dégager du temps de conception, et de sa règle pour apprendre vite : aller chercher l'inconfort.",
+    careerPath: [
+      { etape: "Decathlon Pro", type: "experience", detail: "Web analyste / Chargée de CRO" },
+      { etape: "Welyft", type: "experience", detail: "Agence data marketing & expérimentation" },
+      { etape: "Maison de Haute Joaillerie", type: "experience", detail: "UX Product Designer" }
+    ],
+    reponses: [
+      { section: "parcours", question: "Expériences", reponse: ["Web analyste / Chargée de CRO · Decathlon Pro", "Welyft (agence data marketing)", "UX Product Designer · Maison de Haute Joaillerie"] },
+      { section: "declic", titreSection: "Comment Lisa est arrivée dans le CRO, puis dans l'UX", question: "Ton parcours et ta formation ?", reponse: "J'ai commencé en tant que web analyste / chargée de CRO chez Decathlon Pro (filiale BtoB de Decathlon). Cette première expérience m'a permis d'acquérir directement un mindset data driven et de toujours placer l'utilisateur au centre de mes réflexions. Quelles sont ses frictions, ses besoins, ses motivations : mon objectif est de toujours me mettre à la place de l'utilisateur. J'ai ensuite rejoint Welyft, une agence spécialisée en data marketing, experte de l'expérience digitale de la data à l'expérimentation. Travailler pour des clients différents avec des organisations et enjeux différents a été super formateur. Je recommande à tout le monde de passer par l'agence : ça permet vraiment de monter en compétence rapidement et de développer une curiosité, une exigence et une adaptabilité très fortes. Aujourd'hui j'ai l'opportunité de développer une nouvelle expertise en tant qu'UX Product Designer au sein d'une Maison de Haute Joaillerie." },
+      { section: "Sa plus grande leçon", titreSection: "Pourquoi Lisa se remet toujours en question", question: "Tes succès et apprentissages ?", reponse: "Toujours se remettre en question et être ouvert d'esprit : chacun a un point de vue, une expérience différente et c'est super enrichissant de confronter son avis et ses connaissances avec d'autres personnes pour toujours apprendre et se challenger." },
+      { section: "Son plus gros challenge", titreSection: "Le défi des équipes en silos", question: "Ton approche du CRO et de l'e-commerce ?", reponse: "Le plus gros challenge que j'observe, c'est le maillage des différentes expertises pour créer des expériences digitales ambitieuses : souvent les équipes sont très silotées entre les experts data, CRO, UX, les équipes business ou encore les équipes tech. Créer une organisation résolument tournée vers l'expérience digitale, data driven, tout en alliant la vision business, est souvent compliqué." },
+      { section: "Ses inspirations", titreSection: "Pourquoi Lisa se nourrit de son secteur", question: "Tes inspirations et influences ?", reponse: "Ma philosophie de travail, c'est vraiment de toujours me challenger, aller chercher l'extra mile pour rester ambitieuse et toujours apprendre. Pour les contenus, je consomme beaucoup de contenus secteur (Journal du Luxe, le podcast de Pauline Laigneau & co pour ma part) : je trouve ça important de se nourrir aussi concernant son secteur d'activité at large. Souvent, quand on travaille dans le digital, on pense plus hard skills, et c'est important, mais prendre de la hauteur permet aussi de nourrir ses réflexions, de penser différemment son métier et de mieux comprendre les enjeux business de son entreprise." },
+      { section: "Sa vision", titreSection: "Les AI design generators pour se concentrer sur l'essentiel", question: "Ta vision et ton expertise ?", reponse: "Ce que je trouve super intéressant en ce moment, c'est de tester les AI design generators. Je suis passée côté UX depuis quelques mois et, pour être honnête, être une pro de Figma et faire de la prod pure de wireframes et de prototypes, ce n'est pas vraiment ce qui m'intéresse dans mon métier. Ce qui m'anime, c'est plutôt de concevoir et d'imaginer des UX intéressantes : se dégager du temps en passant par Lovable ou Claude Design est donc super intéressant pour deep dive la user research, comprendre la stratégie avec les équipes business, réfléchir à l'ensemble des enjeux." },
+      { section: "conseil", titreSection: "Le conseil de Lisa pour apprendre vite", question: "Ton conseil et ta secret sauce ?", titre: "Toujours aller chercher l'inconfort.", reponse: "Si on est à l'aise, c'est qu'on maîtrise : allez chercher des projets, des missions sur lesquels vous savez que vous serez challengés et que vous allez découvrir de nouvelles choses. Ça permet d'apprendre super vite ! Deuxième hack bonus : ce qui est assez important dans le monde pro au global, c'est le relationnel. C'est super important de s'intéresser aux gens, poser des questions à des personnes d'autres équipes (vos interlocuteurs ou non) : ça nourrit votre réflexion, ça vous permet de sortir de votre prisme et de comprendre aussi les enjeux des autres métiers." },
+      { section: "Le mot de la fin", titreSection: "Le CRO sans l'UX, ce n'est plus du CRO", question: "Le CRO sans […], ce n'est plus du CRO ?", reponse: "L'UX : on ne peut pas optimiser et créer des variations impactantes sans l'UX et la user research." }
+    ],
+    marques: ["Decathlon Pro", "Welyft"],
+    outils: [
+      { nom: "Lovable", usage: "AI design generator : se dégager du temps de production pour se concentrer sur la conception" },
+      { nom: "Claude Design", usage: "AI design generator : se dégager du temps pour approfondir la user research" }
+    ],
+    mentors: [],
+    ressources: [
+      { titre: "Journal du Luxe", type: "media", auteur: "", lien: "https://journalduluxe.fr", image: "images/inspirations/journal-du-luxe.jpg", raison: "Je consomme beaucoup de contenus secteur : c'est important de se nourrir aussi concernant son secteur d'activité at large.", relation: "follows" },
+      { titre: "Le podcast de Pauline Laigneau", type: "podcast", auteur: "Pauline Laigneau", lien: "", image: "images/inspirations/pauline-laigneau.jpg", raison: "Prendre de la hauteur permet de nourrir ses réflexions et de mieux comprendre les enjeux business de son entreprise.", relation: "follows" }
+    ],
+    sujets: ["IA", "AI design generators", "User research", "Organisation"],
+    aRetenir: {
+      synthese: true,
+      points: [
+        { titre: "L'inconfort fait progresser.", texte: "Les missions où l'on est challengé sont celles où l'on apprend le plus vite." },
+        { titre: "Les silos freinent l'expérience.", texte: "Data, CRO, UX, business et tech doivent travailler ensemble pour créer des expériences ambitieuses." },
+        { titre: "L'IA libère du temps pour concevoir.", texte: "Les AI design generators servent à approfondir la recherche et la stratégie, pas à remplacer la réflexion." }
+      ]
+    },
+    motsCles: ["UX"]
   }
 ];

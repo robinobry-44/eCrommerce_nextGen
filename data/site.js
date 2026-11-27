@@ -169,6 +169,10 @@ window.SITE = {
     "CEWE": "cewe.fr",
     "Croix-Rouge française": "croix-rouge.fr",
     "Orange": "orange.fr",
-    "Air360": "air360.io"
+    "Air360": "air360.io",
+    "Lovable": "lovable.dev",
+    "Claude Design": "claude.ai",
+    "Decathlon Pro": "decathlon.fr",
+    "Welyft": "welyft.com"
   }
 };

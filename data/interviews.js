@@ -268,7 +268,7 @@ window.INTERVIEWS = [
     featured: true,
     photo: "images/interviews/lisa-kolodziejczak.jpg",
     photos: [],
-    lienLinkedin: "",
+    lienLinkedin: "https://www.linkedin.com/in/lisa-kolodziejczak-5a7361184/",
     expertises: ["UX", "CRO", "Product"],
     citation: "Si on est à l'aise, c'est qu'on maîtrise.",
     accroche: "On ne peut pas optimiser et créer des variations impactantes sans l'UX et la user research.",
